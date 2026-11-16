@@ -21,6 +21,11 @@
 - Depoimentos: seção despublicada (Código de Ética do CFN; validar com a Ingrid).
 - Sem preços (enviados pelo WhatsApp). Nenhuma promessa de resultado ou antes/depois.
 
+## Atualização 16/11 (pedido do Pedro)
+- Endereço: Edifício Manhattan, R. São Paulo, 41, Centro Comercial, Santos/SP, 11075-330 (contato, rodapé, FAQ, schema, mapa sob demanda).
+- Movimento e profundidade: Lenis (scroll suave), parallax por scroll e mouse, entrada animada no hero, reveal escalonado, orbs de cor flutuantes.
+- Glassmorphism em cards, planos, fatos, etapas, FAQ, pilares do método e formulário; hover com crescimento, inclinação 3D e brilho seguindo o cursor; botões com escala, brilho e efeito magnético.
+
 ## Inferências a validar com a Ingrid
 - Nome e conteúdo dos 3 formatos (Consultoria online, Acompanhamento completo, Plano de manutenção) — baseados nos stories de 2024.
 - "Método PR": mantido só como nome (não expandido).
@@ -30,5 +35,4 @@
 
 ## Pendências
 - CRN (obrigatório pelo CFN). Enquanto vazio, o site sai com noindex. Preencher `CRN` em `_tools/build_pages.py` e rodar o build.
-- Endereço do consultório em Santos (NAP, schema, mapa).
 - Domínio próprio, GTM/GA4 (`GTM_ID` em `assets/site.js`).

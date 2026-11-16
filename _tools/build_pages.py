@@ -11,12 +11,24 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://ingrid-krichinak.vercel.app"   # trocar ao conectar domínio próprio
 NAME = "Ingrid Krichinak"
 CRN = ""            # ex.: "CRN-3 12345" — obrigatório pelo CFN em material de divulgação
-ADDRESS = None      # ex.: {"street": "...", "district": "...", "zip": "..."}
+ADDRESS = {"building": "Edifício Manhattan", "street": "R. São Paulo, 41", "district": "Centro Comercial", "zip": "11075-330"}
 WA = "5513997771672"
 WA_DISPLAY = "(13) 99777-1672"
 IG = "https://www.instagram.com/ingridkrichinak/"
 NOINDEX = not CRN   # sem CRN publicado, a página fica fora do Google
 TODAY = datetime.date.today().isoformat()
+
+MAPS_Q = "Edifício Manhattan, R. São Paulo, 41, Santos - SP, 11075-330"
+MAPS_LINK = "https://www.google.com/maps/search/?api=1&query=" + quote(MAPS_Q)
+MAPS_EMBED = "https://www.google.com/maps?q=" + quote(MAPS_Q) + "&output=embed"
+
+def orbs(spec):
+    out = "".join(f'<span class="orb {c} float{" slow" if i % 2 else ""}" data-depth="{dp}" style="width:{w}px;height:{w}px;{pos}"></span>' for i, (c, w, pos, dp) in enumerate(spec))
+    return f'<div class="orbs" aria-hidden="true">{out}</div>'
+ORBS_A = orbs([("rose", 520, "left:-160px;top:10%", "0.6"), ("wine", 380, "right:-80px;bottom:-60px", "-0.5"), ("sand", 420, "right:30%;top:-120px", "0.3")])
+ORBS_B = orbs([("rose", 460, "right:-120px;top:-60px", "0.5"), ("sand", 520, "left:-180px;bottom:-140px", "-0.4"), ("wine", 300, "left:42%;top:40%", "0.8")])
+ORBS_C = orbs([("milk", 520, "right:-140px;top:-120px", "0.4"), ("rose", 420, "left:-120px;bottom:-100px", "-0.6")])
+ORBS_D = orbs([("sand", 460, "left:-140px;top:-80px", "0.5"), ("rose", 400, "right:-100px;bottom:-120px", "-0.5")])
 
 def wa(msg):
     return f"https://wa.me/{WA}?text={quote(msg)}"
@@ -146,6 +158,7 @@ SERVICES = [
 ]
 
 HOME_FAQ = [
+  ("Onde fica o consultório?", "No Edifício Manhattan, na R. São Paulo, 41, Centro Comercial, em Santos/SP (CEP 11075-330). Também há atendimento online para qualquer cidade."),
   ("A Ingrid atende online?", "Sim. O atendimento é presencial em Santos e online para qualquer cidade ou país, com o mesmo cuidado e o mesmo suporte pelo WhatsApp."),
   ("Vou ter que cortar tudo o que eu gosto?", "Não. O plano é construído com base na sua rotina e nas suas preferências. A proposta é aprender a fazer escolhas no dia a dia, sem extremismo e sem terrorismo nutricional."),
   ("Como funciona o suporte entre as consultas?", "Você conta com suporte contínuo pelo WhatsApp para dúvidas, imprevistos e ajustes. Com os feedbacks frequentes, é possível ajustar o plano antes mesmo da próxima consulta."),
@@ -197,6 +210,7 @@ def head(title, desc, path, extra_ld=None, preload_img=None):
 <link rel="preload" href="/assets/fonts/manrope-400.woff2" as="font" type="font/woff2" crossorigin>
 {pre}
 <link rel="stylesheet" href="/assets/site.css?v={VER}">
+<script src="/assets/vendor/lenis.min.js" defer></script>
 <script src="/assets/site.js?v={VER}" defer></script>
 {lds}
 </head>
@@ -221,7 +235,7 @@ def nav():
 def footer(wa_msg="Olá, Ingrid! Vim pelo site e quero falar com você."):
     serv = "".join(f'<li><a href="/{s["slug"]}/">{s["nav"]}</a></li>' for s in SERVICES)
     crn = f" · {CRN}" if CRN else ""
-    addr = (f'{ADDRESS["street"]}, {ADDRESS["district"]}, Santos/SP' if ADDRESS else "Santos/SP e atendimento online")
+    addr = (f'{ADDRESS["building"]} · {ADDRESS["street"]}<br>{ADDRESS["district"]}, Santos/SP · {ADDRESS["zip"]}' if ADDRESS else "Santos/SP e atendimento online")
     return f'''<footer class="footer">
   <div class="container">
     <div class="footer-grid">
@@ -276,7 +290,8 @@ def org_ld():
       "founder": {"@type": "Person", "name": NAME, "jobTitle": "Nutricionista"},
     }
     if ADDRESS:
-        o["address"].update({"streetAddress": ADDRESS["street"], "postalCode": ADDRESS["zip"]})
+        o["address"].update({"streetAddress": f'{ADDRESS["street"]} - {ADDRESS["building"]}', "postalCode": ADDRESS["zip"]})
+        o["hasMap"] = MAPS_LINK
     return o
 
 def website_ld():
@@ -298,7 +313,7 @@ def build_home():
     body = f'''{nav()}
 <main id="conteudo">
 <section class="hero" aria-labelledby="hero-t">
-  <div class="hero-bg" aria-hidden="true"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span></div>
+  <div class="hero-bg" aria-hidden="true"><span class="blob b1" data-depth="1.2"></span><span class="blob b2" data-depth="-0.8"></span><span class="blob b3" data-depth="1.6"></span></div>
   <div class="container hero-grid">
     <div>
       <span class="eyebrow">Nutricionista · Santos e online</span>
@@ -309,15 +324,15 @@ def build_home():
         <a class="btn btn-ghost" href="#metodo">Conhecer o método</a>
       </div>
     </div>
-    <div class="hero-photo">
-      <span class="ring" aria-hidden="true"></span>
+    <div class="hero-photo" data-depth="0.35">
+      <span class="ring" aria-hidden="true" data-depth="1.4"></span>
       <div class="frame">
         <picture>
           <source media="(max-width:600px)" srcset="/assets/img/ingrid-blazer-600.webp">
           <img src="/assets/img/ingrid-blazer-960.webp" width="960" height="1200" alt="Retrato da nutricionista Ingrid Krichinak, de blazer preto, com a mão apoiada no queixo" fetchpriority="high" decoding="async">
         </picture>
       </div>
-      <div class="badge"><div><strong>Método PR</strong><span>Plano individual, suporte contínuo e ajustes antes da consulta</span></div></div>
+      <div class="badge" data-depth="0.9"><div><strong>Método PR</strong><span>Plano individual, suporte contínuo e ajustes antes da consulta</span></div></div>
     </div>
   </div>
 </section>
@@ -333,7 +348,8 @@ def build_home():
   </div>
 </section>
 
-<section class="section" id="atendimento" aria-labelledby="areas-t">
+<section class="section has-orbs" id="atendimento" aria-labelledby="areas-t">
+  {ORBS_A}
   <div class="container">
     <div class="areas-head">
       <div><span class="eyebrow">Áreas de atendimento</span><h2 id="areas-t">Um plano para o seu <em>objetivo</em></h2></div>
@@ -361,7 +377,8 @@ def build_home():
   </div>
 </section>
 
-<section class="section" aria-labelledby="formatos-t">
+<section class="section has-orbs" aria-labelledby="formatos-t">
+  {ORBS_B}
   <div class="container">
     <div class="center">
       <span class="eyebrow">Formatos de acompanhamento</span>
@@ -394,9 +411,10 @@ def build_home():
   </div>
 </section>
 
-<section class="section about" id="sobre" aria-labelledby="sobre-t">
+<section class="section about has-orbs" id="sobre" aria-labelledby="sobre-t">
+  {ORBS_C}
   <div class="container about-grid">
-    <div class="about-photo reveal">
+    <div class="about-photo reveal" data-depth="0.25">
       <picture>
         <source media="(max-width:600px)" srcset="/assets/img/ingrid-sorriso-520.webp">
         <img src="/assets/img/ingrid-sorriso-800.webp" width="800" height="1000" alt="Ingrid Krichinak sorrindo, de colete preto, em fundo claro" loading="lazy" decoding="async">
@@ -409,14 +427,15 @@ def build_home():
       <p>Treino há 10 anos de musculação e 3 de CrossFit, e sei na prática que nunca existiu um mês perfeito. Teve fase de muito resultado, fase de manutenção, semana de treino reduzido e dia em que a alimentação saiu do planejado. É por isso que o meu trabalho não é sobre perfeição, é sobre construir um jeito de comer que você consiga sustentar.</p>
       <p>Hoje também sou nutricionista da equipe de ginástica rítmica de competição da AABB e sigo estudando para levar aos meus pacientes estratégias atualizadas e baseadas em evidência.</p>
       <div class="facts">
-        <div class="fact"><strong>Santos e mundo</strong><span>Consultório em Santos e atendimento online.</span></div>
-        <div class="fact"><strong>Performance real</strong><span>Saúde, estética e rendimento no mesmo plano.</span></div>
+        <div class="fact reveal"><strong>Santos e mundo</strong><span>Consultório no Edifício Manhattan, em Santos, e atendimento online.</span></div>
+        <div class="fact reveal"><strong>Performance real</strong><span>Saúde, estética e rendimento no mesmo plano.</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section" aria-labelledby="como-t">
+<section class="section has-orbs" aria-labelledby="como-t">
+  {ORBS_D}
   <div class="container">
     <span class="eyebrow">Como funciona</span>
     <h2 id="como-t">Do primeiro contato ao <em>acompanhamento</em></h2>
@@ -433,10 +452,11 @@ def build_home():
 <section class="section" id="depoimentos"></section>
 -->
 
-<section class="section faq" id="duvidas" aria-labelledby="faq-t">
+<section class="section faq has-orbs" id="duvidas" aria-labelledby="faq-t">
+  {ORBS_A}
   <div class="container faq-grid">
     <div><span class="eyebrow">Dúvidas frequentes</span><h2 id="faq-t">Antes de <em>agendar</em></h2><p class="lead">Não encontrou o que procura? Fale direto com a Ingrid pelo WhatsApp.</p></div>
-    <div>{faq_html(HOME_FAQ)}</div>
+    <div class="faq-panel reveal">{faq_html(HOME_FAQ)}</div>
   </div>
 </section>
 
@@ -456,9 +476,12 @@ def contact_section():
       <ul class="contact-list">
         <li><a href="{wa('Olá, Ingrid! Vim pelo site e quero agendar uma consulta.')}" target="_blank" rel="noopener" data-cta="contato">{ICON_WA}WhatsApp {WA_DISPLAY}</a></li>
         <li><a href="{IG}" target="_blank" rel="noopener">{ICON_IG}@ingridkrichinak</a></li>
-        <li><div>{ICON_PIN}Consultório em Santos/SP</div></li>
+        <li><a href="{MAPS_LINK}" target="_blank" rel="noopener">{ICON_PIN}<span class="addr">{ADDRESS["building"]} · {ADDRESS["street"]}<br>{ADDRESS["district"]}, Santos/SP · {ADDRESS["zip"]}</span></a></li>
         <li><div>{ICON_GLOBE}Atendimento online para qualquer cidade</div></li>
       </ul>
+      <div class="map">
+        <div class="map-facade"><div><p>Edifício Manhattan · R. São Paulo, 41 · Santos/SP</p><button class="btn btn-light" type="button" data-map="{MAPS_EMBED}">Ver no mapa</button></div></div>
+      </div>
     </div>
     <form class="form" id="form-contato" novalidate>
       <div class="row">
@@ -491,7 +514,7 @@ def build_service(s):
     sections = ""
     for t, ps in s["body"]:
         sections += f"<h2>{t}</h2>" + "".join(f"<p>{p}</p>" for p in ps)
-    related = "".join(f'''<a class="card" href="/{o["slug"]}/"><h3>{o["nav"]}</h3><p>{o["card"]}</p><span class="link-arrow">Saiba mais</span></a>''' for o in SERVICES if o is not s)
+    related = "".join(f'''<a class="card reveal" href="/{o["slug"]}/"><h3>{o["nav"]}</h3><p>{o["card"]}</p><span class="link-arrow">Saiba mais</span></a>''' for o in SERVICES if o is not s)
     body = f'''{nav()}
 <main id="conteudo">
 <section class="page-hero">
@@ -502,11 +525,12 @@ def build_service(s):
     <p class="lead">{s["lead"]}</p>
   </div>
 </section>
-<section class="section">
+<section class="section has-orbs">
+  {ORBS_B}
   <div class="container split">
     <article class="prose">{sections}
       <h2>Perguntas frequentes</h2>
-      <div class="faq" style="background:none">{faq_html(s["faq"])}</div>
+      <div class="faq" style="background:none"><div class="faq-panel">{faq_html(s["faq"])}</div></div>
     </article>
     <aside class="aside">
       <img src="/assets/img/ingrid-oculos-520.webp" width="520" height="650" alt="Ingrid Krichinak de óculos, sentada em um sofá claro com livros de nutrição ao lado" loading="lazy" decoding="async">
@@ -517,7 +541,8 @@ def build_service(s):
     </aside>
   </div>
 </section>
-<section class="section" style="background:var(--stone)">
+<section class="section has-orbs" style="background:var(--stone)">
+  {ORBS_C}
   <div class="container">
     <span class="eyebrow">Outras áreas</span>
     <h2>Veja também</h2>

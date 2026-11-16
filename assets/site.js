@@ -2,6 +2,9 @@
   "use strict";
   var WA = "5513997771672";
   var d = document, b = d.body;
+  d.documentElement.classList.add("js");
+  var REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var FINE = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   window.dataLayer = window.dataLayer || [];
   window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
   window.gtag("consent","default",{analytics_storage:"denied",ad_storage:"denied",ad_user_data:"denied",ad_personalization:"denied",wait_for_update:500});
@@ -34,19 +37,98 @@
     if(a){ window.dataLayer.push({event:"whatsapp_click", page:location.pathname, cta:a.getAttribute("data-cta")||"link"}); }
   });
 
-  // Reveal on scroll
+  // Smooth scroll (Lenis)
+  var lenis = null;
+  if(!REDUCED && window.Lenis){
+    lenis = new window.Lenis({duration:1.15, easing:function(t){return Math.min(1, 1.001 - Math.pow(2, -10 * t));}, anchors:{offset:-80}, smoothWheel:true});
+  }
+
+  // Reveal on scroll, com escalonamento entre irmãos
   var rv = d.querySelectorAll(".reveal");
-  if("IntersectionObserver" in window){
+  rv.forEach(function(el){
+    var sib = Array.prototype.filter.call(el.parentNode.children, function(c){ return c.classList.contains("reveal"); });
+    var i = sib.indexOf(el);
+    if(i > 0) el.style.setProperty("--d", (i * 0.09) + "s");
+    el.addEventListener("transitionend", function te(e){ if(e.propertyName === "opacity"){ el.classList.add("done"); el.removeEventListener("transitionend", te); } });
+  });
+  if("IntersectionObserver" in window && !REDUCED){
     var io = new IntersectionObserver(function(es){
       es.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); } });
     }, {rootMargin:"0px 0px -8% 0px"});
     rv.forEach(function(el){ io.observe(el); });
-    // Pause hero animation off-screen
-    var hero = d.querySelector(".hero");
-    if(hero){
-      new IntersectionObserver(function(es){ hero.classList.toggle("paused", !es[0].isIntersecting); }).observe(hero);
+  } else { rv.forEach(function(el){ el.classList.add("in","done"); }); }
+
+  // Profundidade: parallax por scroll e por mouse
+  var depthEls = Array.prototype.slice.call(d.querySelectorAll("[data-depth]"));
+  var hero = d.querySelector(".hero");
+  var mx = 0, my = 0, cmx = 0, cmy = 0, heroVisible = true;
+  if(hero && "IntersectionObserver" in window){
+    new IntersectionObserver(function(es){ heroVisible = es[0].isIntersecting; hero.classList.toggle("paused", !heroVisible); }).observe(hero);
+  }
+  if(FINE && hero){
+    hero.addEventListener("pointermove", function(e){
+      var r = hero.getBoundingClientRect();
+      mx = (e.clientX - r.left) / r.width - .5; my = (e.clientY - r.top) / r.height - .5;
+    });
+    hero.addEventListener("pointerleave", function(){ mx = 0; my = 0; });
+  }
+  var vh = window.innerHeight;
+  window.addEventListener("resize", function(){ vh = window.innerHeight; });
+  function frame(t){
+    if(lenis) lenis.raf(t);
+    if(!REDUCED){
+      cmx += (mx - cmx) * .07; cmy += (my - cmy) * .07;
+      for(var i = 0; i < depthEls.length; i++){
+        var el = depthEls[i], k = parseFloat(el.getAttribute("data-depth")) || 0;
+        var r = el.getBoundingClientRect();
+        if(r.bottom < -200 || r.top > vh + 200) continue;
+        var center = r.top + r.height / 2 - vh / 2;
+        var y = -center * k * .25;
+        var inHero = el.closest(".hero");
+        var x = inHero ? cmx * k * 60 : 0;
+        if(inHero) y += cmy * k * 40;
+        el.style.translate = x.toFixed(1) + "px " + y.toFixed(1) + "px";
+      }
     }
-  } else { rv.forEach(function(el){ el.classList.add("in"); }); }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  // Cards: inclinação 3D + brilho seguindo o cursor
+  d.querySelectorAll(".card, .plan, .fact, .steps li").forEach(function(c){
+    var g = d.createElement("span"); g.className = "glare"; g.setAttribute("aria-hidden","true"); c.appendChild(g);
+    if(!FINE || REDUCED) return;
+    c.addEventListener("pointermove", function(e){
+      var r = c.getBoundingClientRect();
+      var px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+      c.style.setProperty("--mx", (px * 100) + "%"); c.style.setProperty("--my", (py * 100) + "%");
+      c.style.setProperty("--ry", ((px - .5) * 5).toFixed(2) + "deg");
+      c.style.setProperty("--rx", ((.5 - py) * 5).toFixed(2) + "deg");
+    });
+    c.addEventListener("pointerleave", function(){ c.style.setProperty("--rx","0deg"); c.style.setProperty("--ry","0deg"); });
+  });
+
+  // Botões magnéticos
+  if(FINE && !REDUCED){
+    d.querySelectorAll(".btn, .wa-float").forEach(function(btn){
+      btn.addEventListener("pointermove", function(e){
+        var r = btn.getBoundingClientRect();
+        btn.style.translate = ((e.clientX - r.left - r.width/2) * .18).toFixed(1) + "px " + ((e.clientY - r.top - r.height/2) * .25).toFixed(1) + "px";
+      });
+      btn.addEventListener("pointerleave", function(){ btn.style.translate = "0 0"; });
+    });
+  }
+
+  // Mapa sob demanda (não pesa no carregamento)
+  var mapBtn = d.querySelector("[data-map]");
+  if(mapBtn){
+    mapBtn.addEventListener("click", function(){
+      var box = mapBtn.closest(".map");
+      var f = d.createElement("iframe");
+      f.src = mapBtn.getAttribute("data-map"); f.title = "Mapa do consultório"; f.loading = "lazy"; f.referrerPolicy = "no-referrer-when-downgrade";
+      box.appendChild(f); box.querySelector(".map-facade").remove();
+    });
+  }
 
   // Form -> WhatsApp
   var f = d.getElementById("form-contato");
