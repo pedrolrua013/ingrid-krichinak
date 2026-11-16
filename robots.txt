@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ingrid-krichinak.vercel.app/sitemap.xml
