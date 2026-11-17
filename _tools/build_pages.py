@@ -220,19 +220,55 @@ PLANNERS = [
   ("planner-habitos", "Planner de hábitos", 333, 237),
 ]
 
+APP_SCREENS = [
+  ("app-plano", "Tela inicial do aplicativo com as refeições do plano alimentar"),
+  ("app-diario-alimentar", "Diário alimentar do aplicativo com fotos dos pratos registrados"),
+  ("app-cupons", "Tela de benefícios do aplicativo com cupons de marcas parceiras"),
+]
+BASE_BOOKS = [
+  ("ebook-receitas", "E-book de receitas"),
+  ("manual-organizacao-planejamento", "Manual de organização e planejamento"),
+]
+
+def tablet(f, alt, w=188, h=255):
+    return f'<div class="tablet"><img src="/assets/img/materiais/{f}.webp" width="{w}" height="{h}" alt="{html.escape(alt)}" loading="lazy" decoding="async"><span class="glare" aria-hidden="true"></span></div>'
+
 def materiais_section():
-    books = "".join(f'''<figure class="ebook reveal"><div class="tablet"><img src="/assets/img/materiais/{f}.webp" width="188" height="255" alt="Capa do e-book {html.escape(t)}" loading="lazy" decoding="async"><span class="glare" aria-hidden="true"></span></div><figcaption>{html.escape(t)}</figcaption></figure>''' for f, t in EBOOKS)
+    books = "".join(f'''<figure class="ebook reveal">{tablet(f, "Capa do e-book " + t)}<figcaption>{html.escape(t)}</figcaption></figure>''' for f, t in EBOOKS)
     planners = "".join(f'''<figure class="planner reveal"><img src="/assets/img/materiais/{f}.webp" width="{w}" height="{h}" alt="{html.escape(t)} para imprimir e preencher na semana" loading="lazy" decoding="async"><figcaption>{html.escape(t)}</figcaption></figure>''' for f, t, w, h in PLANNERS)
+    screens = "".join(f'''<figure class="ebook device reveal">{tablet(f, alt, 200, 270)}</figure>''' for f, alt in APP_SCREENS)
+    base = "".join(f'''<figure class="ebook reveal">{tablet(f, "Capa do " + t, 190, 256)}<figcaption>{html.escape(t)}</figcaption></figure>''' for f, t in BASE_BOOKS)
     return f'''<section class="section materiais has-orbs" id="materiais" aria-labelledby="materiais-t">
   {ORBS_C}
   <div class="container">
     <div class="center section-head">
-      <span class="eyebrow">Acompanhamento completo</span>
-      <h2 id="materiais-t">Materiais <em>exclusivos</em> para o seu dia a dia</h2>
-      <p class="lead">E-books e planners que acompanham o plano para facilitar as escolhas da semana, das compras ao fim de semana.</p>
+      <span class="eyebrow">Benefícios</span>
+      <h2 id="materiais-t">Tudo o que acompanha o seu <em>plano</em></h2>
+      <p class="lead">Ferramentas e materiais para facilitar as escolhas da semana, das compras ao fim de semana.</p>
     </div>
+
+    <div class="tier-head reveal"><span class="tier-tag">Em todos os acompanhamentos</span></div>
+    <div class="benefit">
+      <div class="benefit-text reveal">
+        <h3>Aplicativo com o seu plano</h3>
+        <ul class="benefit-list">
+          <li>Plano alimentar sempre à mão, refeição por refeição</li>
+          <li>Diário alimentar para registrar os seus pratos</li>
+          <li>Cupons de desconto em <a href="/cupons/">marcas parceiras</a></li>
+        </ul>
+      </div>
+      <div class="devices">{screens}</div>
+    </div>
+    <div class="benefit reverse">
+      <div class="benefit-text reveal">
+        <h3>Receitas e organização da rotina</h3>
+        <p>Um e-book de receitas e um manual de organização e planejamento para ajudar a seguir o plano no dia a dia.</p>
+      </div>
+      <div class="devices two">{base}</div>
+    </div>
+
+    <div class="tier-head premium reveal"><span class="tier-tag">Exclusivos do acompanhamento completo</span><p>E-books personalizados de acordo com as suas dúvidas e planners para a organização semanal.</p></div>
     <div class="ebooks" data-lenis-prevent>{books}</div>
-    <div class="planners-head center"><span class="eyebrow">Planners</span><h3>Organização semanal</h3></div>
     <div class="planners">{planners}</div>
   </div>
 </section>'''
@@ -475,7 +511,7 @@ def build_home():
         <span class="tag">Online</span>
         <h3>Consultoria online</h3>
         <p>Para quem já segue um plano, não precisa de consulta mensal e quer ajustes e respostas pontuais.</p>
-        <ul><li>Plano alimentar individual</li><li>Suporte contínuo no WhatsApp</li><li>Dúvidas sobre suplementos e alterações</li></ul>
+        <ul><li>Plano alimentar individual</li><li>Suporte contínuo no WhatsApp</li><li>Dúvidas sobre suplementos e alterações</li><li><a class="plan-link" href="#materiais">App com plano, diário e cupons</a></li></ul>
         <a class="btn btn-ghost" href="{wa('Olá, Ingrid! Vim pelo site e quero saber sobre a consultoria online.')}" target="_blank" rel="noopener" data-cta="plano-online">Quero saber mais</a>
       </div>
       <div class="plan feature reveal">

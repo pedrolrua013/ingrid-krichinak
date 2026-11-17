@@ -31,7 +31,7 @@
 - No menu e no rodapé, com link para a loja oficial de cada marca (rel=sponsored). Bloco de transparência removido a pedido do Bruno em 16/11. Atenção: o novo Código de Ética do CFN (Res. 856/2026) exige declaração ostensiva de conflito de interesses nessas parcerias; confirmar com a Ingrid.
 
 ## Atualização 16/11 (Bruno): materiais exclusivos
-- Seção #materiais na home (entre formatos e sobre): 6 capas de e-books em moldura de tablet + 2 planners (cardápio semanal e hábitos), recortadas de um print do site da Ingrid no Canva. "Materiais exclusivos de apoio" no plano completo linka para a seção.
+- Seção #materiais "Tudo o que acompanha o seu plano" (entre formatos e sobre). Nível "Em todos os acompanhamentos": app (plano, diário alimentar, cupons) com 3 telas + e-book de receitas e manual de organização. Nível "Exclusivos do acompanhamento completo": 6 capas de e-books em moldura de tablet + 2 planners (cardápio semanal e hábitos), recortadas de prints do site da Ingrid no Canva (lá chamados de planos "basic" e "premium"). Consultoria online ganhou o item do app. "Materiais exclusivos de apoio" no plano completo linka para a seção.
 - Pendente: pegar as capas e planners originais em alta (Canva) para trocar os arquivos em `assets/img/materiais/` (mesmos nomes).
 
 ## Inferências a validar com a Ingrid

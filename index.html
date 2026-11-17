@@ -28,9 +28,9 @@
 <link rel="preload" href="/assets/fonts/cormorant-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/manrope-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" as="image" href="/assets/img/ingrid-blazer-960.webp" media="(min-width:601px)" fetchpriority="high"><link rel="preload" as="image" href="/assets/img/ingrid-blazer-600.webp" media="(max-width:600px)" fetchpriority="high">
-<link rel="stylesheet" href="/assets/site.css?v=202611162135">
+<link rel="stylesheet" href="/assets/site.css?v=202611162140">
 <script src="/assets/vendor/lenis.min.js" defer></script>
-<script src="/assets/site.js?v=202611162135" defer></script>
+<script src="/assets/site.js?v=202611162140" defer></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": ["MedicalBusiness", "LocalBusiness"], "@id": "https://ingrid-krichinak.vercel.app/#negocio", "name": "Ingrid Krichinak Nutricionista", "description": "Nutricionista em Santos e online: emagrecimento, hipertrofia, nutrição esportiva e acompanhamento em casal.", "url": "https://ingrid-krichinak.vercel.app/", "image": "https://ingrid-krichinak.vercel.app/assets/img/og.jpg", "logo": "https://ingrid-krichinak.vercel.app/assets/apple-touch-icon.png", "telephone": "+55-13-99777-1672", "medicalSpecialty": "Nutrition", "areaServed": [{"@type": "City", "name": "Santos"}, {"@type": "Country", "name": "Brasil"}], "address": {"@type": "PostalAddress", "addressLocality": "Santos", "addressRegion": "SP", "addressCountry": "BR", "streetAddress": "R. São Paulo, 41 - Edifício Manhattan", "postalCode": "11075-330"}, "sameAs": ["https://www.instagram.com/ingridkrichinak/"], "founder": {"@type": "Person", "name": "Ingrid Krichinak", "jobTitle": "Nutricionista"}, "hasMap": "https://www.google.com/maps/search/?api=1&query=Edif%C3%ADcio%20Manhattan%2C%20R.%20S%C3%A3o%20Paulo%2C%2041%2C%20Santos%20-%20SP%2C%2011075-330"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "@id": "https://ingrid-krichinak.vercel.app/#site", "url": "https://ingrid-krichinak.vercel.app/", "name": "Ingrid Krichinak Nutricionista", "inLanguage": "pt-BR"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Onde fica o consultório?", "acceptedAnswer": {"@type": "Answer", "text": "No Edifício Manhattan, na R. São Paulo, 41, Centro Comercial, em Santos/SP (CEP 11075-330). Também há atendimento online para qualquer cidade."}}, {"@type": "Question", "name": "A Ingrid atende online?", "acceptedAnswer": {"@type": "Answer", "text": "Sim. O atendimento é presencial em Santos e online para qualquer cidade ou país, com o mesmo cuidado e o mesmo suporte pelo WhatsApp."}}, {"@type": "Question", "name": "Vou ter que cortar tudo o que eu gosto?", "acceptedAnswer": {"@type": "Answer", "text": "Não. O plano é construído com base na sua rotina e nas suas preferências. A proposta é aprender a fazer escolhas no dia a dia, sem extremismo e sem terrorismo nutricional."}}, {"@type": "Question", "name": "Como funciona o suporte entre as consultas?", "acceptedAnswer": {"@type": "Answer", "text": "Você conta com suporte contínuo pelo WhatsApp para dúvidas, imprevistos e ajustes. Com os feedbacks frequentes, é possível ajustar o plano antes mesmo da próxima consulta."}}, {"@type": "Question", "name": "Preciso levar exames?", "acceptedAnswer": {"@type": "Answer", "text": "Se você tiver exames recentes, leve. Quando necessário, a Ingrid pode solicitar exames laboratoriais para complementar a avaliação."}}, {"@type": "Question", "name": "E depois que eu atingir meu objetivo?", "acceptedAnswer": {"@type": "Answer", "text": "Existe o plano de manutenção, com consultas mais espaçadas e suporte para ajustar estratégias. A ideia é construir autonomia sem perder a direção."}}, {"@type": "Question", "name": "Como agendo a primeira consulta?", "acceptedAnswer": {"@type": "Answer", "text": "Pelo WhatsApp (13) 99777-1672. Você recebe as informações sobre formatos, valores e horários disponíveis."}}]}</script>
@@ -127,7 +127,7 @@
         <span class="tag">Online</span>
         <h3>Consultoria online</h3>
         <p>Para quem já segue um plano, não precisa de consulta mensal e quer ajustes e respostas pontuais.</p>
-        <ul><li>Plano alimentar individual</li><li>Suporte contínuo no WhatsApp</li><li>Dúvidas sobre suplementos e alterações</li></ul>
+        <ul><li>Plano alimentar individual</li><li>Suporte contínuo no WhatsApp</li><li>Dúvidas sobre suplementos e alterações</li><li><a class="plan-link" href="#materiais">App com plano, diário e cupons</a></li></ul>
         <a class="btn btn-ghost" href="https://wa.me/5513997771672?text=Ol%C3%A1%2C%20Ingrid%21%20Vim%20pelo%20site%20e%20quero%20saber%20sobre%20a%20consultoria%20online." target="_blank" rel="noopener" data-cta="plano-online">Quero saber mais</a>
       </div>
       <div class="plan feature reveal">
@@ -152,12 +152,33 @@
   <div class="orbs" aria-hidden="true"><span class="orb milk float" data-depth="0.4" style="width:520px;height:520px;right:-140px;top:-120px"></span><span class="orb rose float slow" data-depth="-0.6" style="width:420px;height:420px;left:-120px;bottom:-100px"></span></div>
   <div class="container">
     <div class="center section-head">
-      <span class="eyebrow">Acompanhamento completo</span>
-      <h2 id="materiais-t">Materiais <em>exclusivos</em> para o seu dia a dia</h2>
-      <p class="lead">E-books e planners que acompanham o plano para facilitar as escolhas da semana, das compras ao fim de semana.</p>
+      <span class="eyebrow">Benefícios</span>
+      <h2 id="materiais-t">Tudo o que acompanha o seu <em>plano</em></h2>
+      <p class="lead">Ferramentas e materiais para facilitar as escolhas da semana, das compras ao fim de semana.</p>
     </div>
+
+    <div class="tier-head reveal"><span class="tier-tag">Em todos os acompanhamentos</span></div>
+    <div class="benefit">
+      <div class="benefit-text reveal">
+        <h3>Aplicativo com o seu plano</h3>
+        <ul class="benefit-list">
+          <li>Plano alimentar sempre à mão, refeição por refeição</li>
+          <li>Diário alimentar para registrar os seus pratos</li>
+          <li>Cupons de desconto em <a href="/cupons/">marcas parceiras</a></li>
+        </ul>
+      </div>
+      <div class="devices"><figure class="ebook device reveal"><div class="tablet"><img src="/assets/img/materiais/app-plano.webp" width="200" height="270" alt="Tela inicial do aplicativo com as refeições do plano alimentar" loading="lazy" decoding="async"><span class="glare" aria-hidden="true"></span></div></figure><figure class="ebook device reveal"><div class="tablet"><img src="/assets/img/materiais/app-diario-alimentar.webp" width="200" height="270" alt="Diário alimentar do aplicativo com fotos dos pratos registrados" loading="lazy" decoding="async"><span class="glare" aria-hidden="true"></span></div></figure><figure class="ebook device reveal"><div class="tablet"><img src="/assets/img/materiais/app-cupons.webp" width="200" height="270" alt="Tela de benefícios do aplicativo com cupons de marcas parceiras" loading="lazy" decoding="async"><span class="glare" aria-hidden="true"></span></div></figure></div>
+    </div>
+    <div class="benefit reverse">
+      <div class="benefit-text reveal">
+        <h3>Receitas e organização da rotina</h3>
+        <p>Um e-book de receitas e um manual de organização e planejamento para ajudar a seguir o plano no dia a dia.</p>
+      </div>
+      <div class="devices two"><figure class="ebook reveal"><div class="tablet"><img src="/assets/img/materiais/ebook-receitas.webp" width="190" height="256" alt="Capa do E-book de receitas" loading="lazy" decoding="async"><span class="glare" aria-hidden="true"></span></div><figcaption>E-book de receitas</figcaption></figure><figure class="ebook reveal"><div class="tablet"><img src="/assets/img/materiais/manual-organizacao-planejamento.webp" width="190" height="256" alt="Capa do Manual de organização e planejamento" loading="lazy" decoding="async"><span class="glare" aria-hidden="true"></span></div><figcaption>Manual de organização e planejamento</figcaption></figure></div>
+    </div>
+
+    <div class="tier-head premium reveal"><span class="tier-tag">Exclusivos do acompanhamento completo</span><p>E-books personalizados de acordo com as suas dúvidas e planners para a organização semanal.</p></div>
     <div class="ebooks" data-lenis-prevent><figure class="ebook reveal"><div class="tablet"><img src="/assets/img/materiais/trocas-inteligentes-bebidas.webp" width="188" height="255" alt="Capa do e-book Trocas inteligentes: bebidas alcoólicas" loading="lazy" decoding="async"><span class="glare" aria-hidden="true"></span></div><figcaption>Trocas inteligentes: bebidas alcoólicas</figcaption></figure><figure class="ebook reveal"><div class="tablet"><img src="/assets/img/materiais/receitas-airfryer.webp" width="188" height="255" alt="Capa do e-book Receitas saudáveis e deliciosas na airfryer" loading="lazy" decoding="async"><span class="glare" aria-hidden="true"></span></div><figcaption>Receitas saudáveis e deliciosas na airfryer</figcaption></figure><figure class="ebook reveal"><div class="tablet"><img src="/assets/img/materiais/reducao-de-danos-fim-de-semana.webp" width="188" height="255" alt="Capa do e-book Redução de danos no fim de semana" loading="lazy" decoding="async"><span class="glare" aria-hidden="true"></span></div><figcaption>Redução de danos no fim de semana</figcaption></figure><figure class="ebook reveal"><div class="tablet"><img src="/assets/img/materiais/marmitas-da-semana.webp" width="188" height="255" alt="Capa do e-book Passo a passo para preparar as marmitas da semana" loading="lazy" decoding="async"><span class="glare" aria-hidden="true"></span></div><figcaption>Passo a passo para preparar as marmitas da semana</figcaption></figure><figure class="ebook reveal"><div class="tablet"><img src="/assets/img/materiais/variar-verduras.webp" width="188" height="255" alt="Capa do e-book Formas de variar o consumo de verduras" loading="lazy" decoding="async"><span class="glare" aria-hidden="true"></span></div><figcaption>Formas de variar o consumo de verduras</figcaption></figure><figure class="ebook reveal"><div class="tablet"><img src="/assets/img/materiais/guia-produtos-suplementos.webp" width="188" height="255" alt="Capa do e-book Guia de produtos e suplementos" loading="lazy" decoding="async"><span class="glare" aria-hidden="true"></span></div><figcaption>Guia de produtos e suplementos</figcaption></figure></div>
-    <div class="planners-head center"><span class="eyebrow">Planners</span><h3>Organização semanal</h3></div>
     <div class="planners"><figure class="planner reveal"><img src="/assets/img/materiais/planner-cardapio-semanal.webp" width="340" height="237" alt="Cardápio semanal para imprimir e preencher na semana" loading="lazy" decoding="async"><figcaption>Cardápio semanal</figcaption></figure><figure class="planner reveal"><img src="/assets/img/materiais/planner-habitos.webp" width="333" height="237" alt="Planner de hábitos para imprimir e preencher na semana" loading="lazy" decoding="async"><figcaption>Planner de hábitos</figcaption></figure></div>
   </div>
 </section>

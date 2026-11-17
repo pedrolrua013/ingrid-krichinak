@@ -561,3 +561,31 @@ body.leaving{opacity:0;transform:translateY(-14px)}
   .ebook{flex:0 0 clamp(150px,42vw,200px);scroll-snap-align:center}
 }
 @media (prefers-reduced-motion:reduce){.tablet,.planner img{transition:none}.ebook:hover .tablet,.planner:hover img{transform:none}}
+
+/* Benefícios: níveis */
+.tier-head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;margin:12px 0 clamp(32px,4vw,48px)}
+.tier-head.premium{margin-top:clamp(72px,8vw,112px);padding-top:clamp(48px,5vw,64px);border-top:1px solid var(--line)}
+.tier-head p{margin:0;color:var(--muted);font-size:.98rem;max-width:52ch}
+.tier-tag{display:inline-flex;align-items:center;padding:9px 18px;border-radius:99px;font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);background:var(--glass-strong);border:1px solid var(--glass-border);box-shadow:var(--glass-shadow)}
+.tier-head.premium .tier-tag{background:linear-gradient(160deg,rgba(40,34,30,.9),rgba(22,20,18,.95));color:#f3d6cf;border-color:rgba(255,255,255,.12)}
+.benefit{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(32px,5vw,80px);align-items:center;margin-bottom:clamp(48px,6vw,80px)}
+.benefit.reverse{grid-template-columns:1.15fr .85fr}
+.benefit.reverse .benefit-text{order:2}
+.benefit-text h3{font-size:clamp(1.7rem,1.3rem + 1.2vw,2.3rem);margin-bottom:16px}
+.benefit-text p{color:var(--ink-2);max-width:42ch}
+.benefit-list{list-style:none;padding:0;margin:0}
+.benefit-list li{position:relative;padding:12px 0 12px 30px;border-top:1px solid var(--line);color:var(--ink-2)}
+.benefit-list li:last-child{border-bottom:1px solid var(--line)}
+.benefit-list li::before{content:"";position:absolute;left:4px;top:21px;width:10px;height:6px;border-left:1.5px solid var(--accent);border-bottom:1.5px solid var(--accent);transform:rotate(-45deg)}
+.benefit-list a{color:var(--accent);text-underline-offset:3px}
+.devices{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,1.6vw,22px);align-items:center}
+.devices.two{grid-template-columns:repeat(2,minmax(0,220px));justify-content:center;gap:clamp(18px,2.4vw,32px)}
+.devices .device:nth-child(2){transform:translateY(-22px)}
+.tablet img{background:#fff}
+@media (max-width:860px){
+  .benefit,.benefit.reverse{grid-template-columns:1fr}
+  .benefit.reverse .benefit-text{order:0}
+  .devices .device:nth-child(2){transform:none}
+}
+.planners{margin-top:clamp(44px,5vw,72px)}
+@media (max-width:640px){.tier-tag{font-size:.64rem;letter-spacing:.12em;padding:9px 14px}}
