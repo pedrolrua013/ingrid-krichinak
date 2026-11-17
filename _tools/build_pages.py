@@ -546,12 +546,13 @@ def build_home():
     <div class="reveal">
       <span class="eyebrow">Sobre</span>
       <h2 id="sobre-t">Ingrid <em>Krichinak</em></h2>
-      <p class="lead">Nutricionista em Santos, com atendimento presencial e online, focada em emagrecimento, hipertrofia e nutrição esportiva.</p>
+      <p class="lead">Nutricionista com foco em emagrecimento, pós-graduada em Nutrição, Fisiologia e Metabolismo no Esporte. Atendo em Santos e online.</p>
+      <p><strong>Minha missão é otimizar a rotina dos meus pacientes.</strong> Com os dias cada vez mais corridos, a gente precisa saber fazer escolhas práticas, gostosas e saudáveis, sem deixar de comer o que gosta. A abordagem respeita o contexto e os hábitos de cada pessoa, porque eu prezo por um estilo de vida sustentável.</p>
       <p>Treino há 10 anos de musculação e 3 de CrossFit, e sei na prática que nunca existiu um mês perfeito. Teve fase de muito resultado, fase de manutenção, semana de treino reduzido e dia em que a alimentação saiu do planejado. É por isso que o meu trabalho não é sobre perfeição, é sobre construir um jeito de comer que você consiga sustentar.</p>
       <p>Hoje também sou nutricionista da equipe de ginástica rítmica de competição da AABB e sigo estudando para levar aos meus pacientes estratégias atualizadas e baseadas em evidência.</p>
       <div class="facts">
-        <div class="fact reveal"><strong>Santos e mundo</strong><span>Consultório no Edifício Manhattan, em Santos, e atendimento online.</span></div>
-        <div class="fact reveal"><strong>Performance real</strong><span>Saúde, estética e rendimento no mesmo plano.</span></div>
+        <div class="fact stat reveal"><strong><em>+</em><b data-count="500">500</b></strong><small>pacientes atendidos</small><span>Praticantes de atividade física, corredores, crossfit, musculação, atletas e quem busca mais qualidade de vida.</span></div>
+        <div class="fact stat reveal"><strong><em>+</em><b data-count="8">8</b></strong><small>países</small><span>Atendimento online para quem mora fora, adaptado à rotina e à cultura de cada lugar.</span></div>
       </div>
     </div>
   </div>

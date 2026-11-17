@@ -287,4 +287,19 @@
     });
     window.addEventListener("pageshow", function(){ b.classList.remove("leaving"); });
   }
+
+  // Números: contagem ao aparecer na tela
+  var counters = d.querySelectorAll("[data-count]");
+  if(counters.length && "IntersectionObserver" in window && !REDUCED){
+    counters.forEach(function(el){ el.textContent = "0"; });
+    var cio = new IntersectionObserver(function(es){
+      es.forEach(function(en){
+        if(!en.isIntersecting) return; cio.unobserve(en.target);
+        var el = en.target, end = parseInt(el.getAttribute("data-count"), 10), t0 = null, dur = end > 50 ? 1800 : 1100;
+        function step(t){ if(!t0) t0 = t; var p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 4); el.textContent = Math.round(end * e); if(p < 1) requestAnimationFrame(step); }
+        setTimeout(function(){ requestAnimationFrame(step); }, 250);
+      });
+    }, {threshold:.6});
+    counters.forEach(function(el){ cio.observe(el); });
+  }
 })();

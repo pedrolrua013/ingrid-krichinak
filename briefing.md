@@ -34,6 +34,10 @@
 - Seção #materiais "Tudo o que acompanha o seu plano" (entre formatos e sobre). Nível "Em todos os acompanhamentos": app (plano, diário alimentar, cupons) com 3 telas + e-book de receitas e manual de organização. Nível "Exclusivos do acompanhamento completo": 6 capas de e-books em moldura de tablet + 2 planners (cardápio semanal e hábitos), recortadas de prints do site da Ingrid no Canva (lá chamados de planos "basic" e "premium"). Consultoria online ganhou o item do app. "Materiais exclusivos de apoio" no plano completo linka para a seção.
 - Pendente: pegar as capas e planners originais em alta (Canva) para trocar os arquivos em `assets/img/materiais/` (mesmos nomes).
 
+## Atualização 16/11 (Bruno): Sobre
+- Do site da Ingrid no Canva: pós-graduada em Nutrição, Fisiologia e Metabolismo no Esporte; missão "otimizar a rotina dos pacientes"; +500 e +8 países.
+- Adaptado por causa do CFN: "+500 vidas transformadas" virou "+500 pacientes atendidos" (sem alegação de resultado) e "especialista em emagrecimento" virou "com foco em emagrecimento" (o título de especialista exige registro). Confirmar com a Ingrid.
+
 ## Inferências a validar com a Ingrid
 - Nome e conteúdo dos 3 formatos (Consultoria online, Acompanhamento completo, Plano de manutenção) — baseados nos stories de 2024.
 - "Método PR": mantido só como nome (não expandido).

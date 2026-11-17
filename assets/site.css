@@ -589,3 +589,9 @@ body.leaving{opacity:0;transform:translateY(-14px)}
 }
 .planners{margin-top:clamp(44px,5vw,72px)}
 @media (max-width:640px){.tier-tag{font-size:.64rem;letter-spacing:.12em;padding:9px 14px}}
+
+/* Sobre: números */
+.fact.stat strong{display:flex;align-items:baseline;gap:2px;font:400 clamp(2.6rem,2rem + 2vw,3.4rem)/1 var(--serif);color:var(--ink);margin-bottom:2px}
+.fact.stat strong em{font-style:normal;color:var(--accent);font-size:.7em}
+.fact.stat strong b{font-weight:400;font-variant-numeric:lining-nums tabular-nums;font-feature-settings:"lnum" 1,"tnum" 1}
+.fact.stat small{display:block;font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
