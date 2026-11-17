@@ -624,15 +624,16 @@ def build_coupons():
         <a class="link-arrow coupon-link" href="{c["url"]}" target="_blank" rel="noopener sponsored" data-cta="cupom-loja">Ir para a loja {html.escape(c["brand"])}</a></article>'''
     body = f'''{nav()}
 <main id="conteudo">
-<section class="page-hero">
+<section class="page-hero coupons-hero">
   <div class="container">
     <nav class="crumbs" aria-label="Você está em"><a href="/">Início</a><span>/</span>Cupons</nav>
     <span class="eyebrow">Parcerias</span>
     <h1>Cupons de <em>parceiros</em></h1>
-    <p class="lead">Descontos em marcas que fazem parte da rotina da Ingrid. Toque no código para copiar e use na loja da marca.</p>
+    <p class="lead">Marcas que fazem parte da rotina da Ingrid. Toque no código para copiar.</p>
+    <ul class="coupon-brands" aria-label="Marcas parceiras">{"".join(f"<li>{html.escape(c['brand'])}</li>" for c in COUPONS)}</ul>
   </div>
 </section>
-<section class="section has-orbs">
+<section class="section has-orbs coupons-section">
   {ORBS_B}
   <div class="container">
     <div class="coupons">{cards}</div>
