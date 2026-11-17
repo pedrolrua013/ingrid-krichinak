@@ -186,4 +186,14 @@
     ck.querySelector("[data-consent=yes]").addEventListener("click", function(){ set("granted"); apply("granted"); hide(); });
     ck.querySelector("[data-consent=no]").addEventListener("click", function(){ set("denied"); apply("denied"); hide(); });
   }
+
+  // Cupons: copiar código
+  d.querySelectorAll("[data-copy]").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var code = btn.getAttribute("data-copy");
+      var done = function(){ btn.classList.add("copied"); setTimeout(function(){ btn.classList.remove("copied"); }, 1600); window.dataLayer.push({event:"cupom_copiado", cupom: code}); };
+      if(navigator.clipboard && window.isSecureContext){ navigator.clipboard.writeText(code).then(done, function(){ fallback(); }); } else { fallback(); }
+      function fallback(){ var t = d.createElement("textarea"); t.value = code; t.setAttribute("readonly",""); t.style.position = "fixed"; t.style.opacity = "0"; b.appendChild(t); t.select(); try{ d.execCommand("copy"); done(); }catch(e){} b.removeChild(t); }
+    });
+  });
 })();

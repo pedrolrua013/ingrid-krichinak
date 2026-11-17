@@ -167,6 +167,20 @@ HOME_FAQ = [
   ("Como agendo a primeira consulta?", f"Pelo WhatsApp {WA_DISPLAY}. Você recebe as informações sobre formatos, valores e horários disponíveis."),
 ]
 
+# ---------------- Cupons ----------------
+# Fonte: destaque "Cupons" do Instagram (prints enviados pelo Bruno em 16/11/2026).
+# Validar com a Ingrid: se os códigos seguem ativos e a declaração de parceria.
+COUPONS = [
+  {"brand": "Liv Up", "cat": "Marmitas congeladas", "desc": "Refeições prontas para as semanas mais corridas.",
+   "codes": [("30% na 1ª compra", "ingrid.krichinak1"), ("10% nas demais compras", "ingrid.krichinak")]},
+  {"brand": "Ocean Drop", "cat": "Eletrólitos e suplementos", "desc": "Hidratação e reposição de eletrólitos.",
+   "codes": [("20% de desconto", "INGRIDK")]},
+  {"brand": "Dobro", "cat": "Géis de carboidrato", "desc": "Carboidrato para treinos longos, provas e intra-treino.",
+   "codes": [("Desconto na loja Dobro", "DOBROINGRIDK")]},
+  {"brand": "DUX Nutrition", "cat": "Whey e suplementos", "desc": "Proteína e suplementação esportiva.",
+   "codes": [("Desconto na loja DUX", "PACINGRIDFARIA")]},
+]
+
 # ---------------- Templates ----------------
 NAV_ITEMS = [("/#metodo","Método"),("/#atendimento","Atendimento"),("/#sobre","Sobre"),("/#duvidas","Dúvidas"),("/#contato","Contato")]
 
@@ -253,6 +267,7 @@ def footer(wa_msg="Olá, Ingrid! Vim pelo site e quero falar com você."):
           <li><a href="{wa(wa_msg)}" target="_blank" rel="noopener" data-cta="footer">WhatsApp {WA_DISPLAY}</a></li>
           <li><a href="{IG}" target="_blank" rel="noopener">Instagram @ingridkrichinak</a></li>
           <li>{addr}</li>
+          <li><a href="/cupons/">Cupons de parceiros</a></li>
           <li><a href="/politica-de-privacidade/">Política de privacidade</a></li>
         </ul>
       </div>
@@ -554,6 +569,47 @@ def build_service(s):
 '''
     write(f"{s['slug']}/index.html", h + body + footer(s["wa"]))
 
+ICON_COPY = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M15 9V6.5A2.5 2.5 0 0 0 12.5 4h-6A2.5 2.5 0 0 0 4 6.5v6A2.5 2.5 0 0 0 6.5 15H9"/></svg>'
+
+def build_coupons():
+    path = "/cupons/"
+    crumbs_ld = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Início", "item": SITE + "/"},
+        {"@type": "ListItem", "position": 2, "name": "Cupons", "item": SITE + path}]}
+    h = head("Cupons de parceiros | Ingrid Krichinak Nutricionista",
+             "Cupons de desconto de marcas parceiras da nutricionista Ingrid Krichinak: marmitas, eletrólitos, géis de carboidrato e suplementos.",
+             path, [crumbs_ld])
+    cards = ""
+    for i, c in enumerate(COUPONS):
+        codes = "".join(f'''<div class="code-row"><span class="code-label">{html.escape(lbl)}</span>
+          <button class="code" type="button" data-copy="{html.escape(code)}" aria-label="Copiar cupom {html.escape(code)}"><span>{html.escape(code)}</span>{ICON_COPY}<em aria-hidden="true">Copiado</em></button></div>''' for lbl, code in c["codes"])
+        cards += f'''<article class="card coupon reveal"><span class="num">0{i+1}</span><span class="coupon-cat">{html.escape(c["cat"])}</span>
+        <h3>{html.escape(c["brand"])}</h3><p>{html.escape(c["desc"])}</p>{codes}</article>'''
+    body = f'''{nav()}
+<main id="conteudo">
+<section class="page-hero">
+  <div class="container">
+    <nav class="crumbs" aria-label="Você está em"><a href="/">Início</a><span>/</span>Cupons</nav>
+    <span class="eyebrow">Parcerias</span>
+    <h1>Cupons de <em>parceiros</em></h1>
+    <p class="lead">Descontos em marcas que fazem parte da rotina da Ingrid. Toque no código para copiar e use no site ou app da marca.</p>
+  </div>
+</section>
+<section class="section has-orbs">
+  {ORBS_B}
+  <div class="container">
+    <div class="coupons">{cards}</div>
+    <aside class="disclosure reveal" aria-label="Declaração de parceria">
+      <h2>Transparência</h2>
+      <p>Estes cupons vêm de parcerias comerciais entre a Ingrid e as marcas, que podem gerar benefício para ela quando o código é usado. Usar um cupom é uma escolha sua: não faz parte da prescrição individual e não substitui a orientação de um nutricionista. Validade, regras e valor de cada desconto são definidos pelas marcas e podem mudar sem aviso.</p>
+      <a class="link-arrow" href="{wa("Olá, Ingrid! Vim pela página de cupons e quero saber mais sobre o acompanhamento.")}" target="_blank" rel="noopener" data-cta="cupons">Quero um plano feito para mim</a>
+    </aside>
+  </div>
+</section>
+</main>
+'''
+    write("cupons/index.html", h + body + footer("Olá, Ingrid! Vim pela página de cupons do site."))
+
 def build_privacy():
     path = "/politica-de-privacidade/"
     h = head("Política de privacidade | Ingrid Krichinak", "Como o site da nutricionista Ingrid Krichinak trata dados pessoais, cookies e contatos pelo WhatsApp, conforme a LGPD.", path)
@@ -598,7 +654,7 @@ def build_404():
     write("404.html", h + body + footer())
 
 def build_meta_files():
-    pages = ["/"] + [f"/{s['slug']}/" for s in SERVICES] + ["/politica-de-privacidade/"]
+    pages = ["/"] + [f"/{s['slug']}/" for s in SERVICES] + ["/cupons/", "/politica-de-privacidade/"]
     sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     for p in pages:
         sm += f"  <url><loc>{SITE}{p}</loc><lastmod>{TODAY}</lastmod></url>\n"
@@ -618,6 +674,7 @@ if __name__ == "__main__":
     build_home()
     for s in SERVICES:
         build_service(s)
+    build_coupons()
     build_privacy()
     build_404()
     build_meta_files()
