@@ -595,3 +595,14 @@ body.leaving{opacity:0;transform:translateY(-14px)}
 .fact.stat strong em{font-style:normal;color:var(--accent);font-size:.7em}
 .fact.stat strong b{font-weight:400;font-variant-numeric:lining-nums tabular-nums;font-feature-settings:"lnum" 1,"tnum" 1}
 .fact.stat small{display:block;font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+
+/* Níveis de benefício no padrão do site */
+.tier-head .eyebrow{margin-bottom:0}
+.tier-head .eyebrow::after{content:"";width:28px;height:1px;background:currentColor}
+.tier-head h3{font-size:clamp(1.8rem,1.4rem + 1.3vw,2.5rem);margin:6px 0 4px}
+.tier-head h3 em{font-style:italic;color:var(--accent)}
+/* Planners: legenda com movimento */
+.planner figcaption{transition:color .4s var(--ease),letter-spacing .5s var(--ease),transform .5s var(--ease)}
+.planner:hover figcaption{color:var(--accent);letter-spacing:.2em;transform:translateY(-4px)}
+.ebook figcaption{transition:color .4s var(--ease),transform .5s var(--ease)}
+.ebook:hover figcaption{transform:translateY(-4px)}

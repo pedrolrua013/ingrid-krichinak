@@ -247,7 +247,7 @@ def materiais_section():
       <p class="lead">Ferramentas e materiais para facilitar as escolhas da semana, das compras ao fim de semana.</p>
     </div>
 
-    <div class="tier-head reveal"><span class="tier-tag">Em todos os acompanhamentos</span></div>
+    <div class="tier-head reveal"><span class="eyebrow">Em todos os acompanhamentos</span></div>
     <div class="benefit">
       <div class="benefit-text reveal">
         <h3>Aplicativo com o seu plano</h3>
@@ -267,7 +267,7 @@ def materiais_section():
       <div class="devices two">{base}</div>
     </div>
 
-    <div class="tier-head premium reveal"><span class="tier-tag">Exclusivos do acompanhamento completo</span><p>E-books personalizados de acordo com as suas dúvidas e planners para a organização semanal.</p></div>
+    <div class="tier-head premium reveal"><span class="eyebrow">Exclusivos do acompanhamento completo</span><h3>Materiais para ir <em>além</em></h3><p>E-books personalizados de acordo com as suas dúvidas e planners para a organização semanal.</p></div>
     <div class="ebooks" data-lenis-prevent>{books}</div>
     <div class="planners">{planners}</div>
   </div>
@@ -288,7 +288,7 @@ COUPONS = [
 ]
 
 # ---------------- Templates ----------------
-NAV_ITEMS = [("/#metodo","Método"),("/#atendimento","Atendimento"),("/#sobre","Sobre"),("/#duvidas","Dúvidas"),("/cupons/","Cupons"),("/#contato","Contato")]
+NAV_ITEMS = [("/#sobre","Sobre"),("/#atendimento","Atendimento"),("/#metodo","Método"),("/#formatos","Planos"),("/cupons/","Cupons"),("/#contato","Contato")]
 
 def head(title, desc, path, extra_ld=None, preload_img=None):
     url = SITE + path
@@ -469,6 +469,30 @@ def build_home():
   </div>
 </section>
 
+<section class="section about has-orbs" id="sobre" aria-labelledby="sobre-t">
+  {ORBS_C}
+  <div class="container about-grid">
+    <div class="about-photo reveal" data-depth="0.25">
+      <picture>
+        <source media="(max-width:600px)" srcset="/assets/img/ingrid-sorriso-520.webp">
+        <img src="/assets/img/ingrid-sorriso-800.webp" width="800" height="1000" alt="Ingrid Krichinak sorrindo, de colete preto, em fundo claro" loading="lazy" decoding="async">
+      </picture>
+    </div>
+    <div class="reveal">
+      <span class="eyebrow">Sobre</span>
+      <h2 id="sobre-t">Ingrid <em>Krichinak</em></h2>
+      <p class="lead">Nutricionista com foco em emagrecimento, pós-graduada em Nutrição, Fisiologia e Metabolismo no Esporte. Atendo em Santos e online.</p>
+      <p><strong>Minha missão é otimizar a rotina dos meus pacientes.</strong> Com os dias cada vez mais corridos, a gente precisa saber fazer escolhas práticas, gostosas e saudáveis, sem deixar de comer o que gosta. A abordagem respeita o contexto e os hábitos de cada pessoa, porque eu prezo por um estilo de vida sustentável.</p>
+      <p>Treino há 10 anos de musculação e 3 de CrossFit, e sei na prática que nunca existiu um mês perfeito. Teve fase de muito resultado, fase de manutenção, semana de treino reduzido e dia em que a alimentação saiu do planejado. É por isso que o meu trabalho não é sobre perfeição, é sobre construir um jeito de comer que você consiga sustentar.</p>
+      <p>Hoje também sou nutricionista da equipe de ginástica rítmica de competição da AABB e sigo estudando para levar aos meus pacientes estratégias atualizadas e baseadas em evidência.</p>
+      <div class="facts">
+        <div class="fact stat reveal"><strong><em>+</em><b data-count="500">500</b></strong><small>pacientes atendidos</small><span>Praticantes de atividade física, corredores, crossfit, musculação, atletas e quem busca mais qualidade de vida.</span></div>
+        <div class="fact stat reveal"><strong><em>+</em><b data-count="8">8</b></strong><small>países</small><span>Atendimento online para quem mora fora, adaptado à rotina e à cultura de cada lugar.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section has-orbs" id="atendimento" aria-labelledby="areas-t">
   {ORBS_A}
   <div class="container">
@@ -498,7 +522,23 @@ def build_home():
   </div>
 </section>
 
-<section class="section has-orbs" aria-labelledby="formatos-t">
+{depoimentos_section()}
+
+<section class="section has-orbs" aria-labelledby="como-t">
+  {ORBS_D}
+  <div class="container">
+    <span class="eyebrow">Como funciona</span>
+    <h2 id="como-t">Do primeiro contato ao <em>acompanhamento</em></h2>
+    <ol class="steps">
+      <li class="reveal"><h3>Contato</h3><p>Você chama no WhatsApp e recebe as informações sobre formatos, valores e horários.</p></li>
+      <li class="reveal"><h3>Consulta</h3><p>Avaliação da sua rotina, histórico, objetivo, treino e preferências alimentares.</p></li>
+      <li class="reveal"><h3>Plano</h3><p>Plano alimentar individual e materiais de apoio para organizar a semana.</p></li>
+      <li class="reveal"><h3>Ajustes</h3><p>Suporte pelo WhatsApp e retornos para ajustar a estratégia sempre que for preciso.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="section has-orbs" id="formatos" aria-labelledby="formatos-t">
   {ORBS_B}
   <div class="container">
     <div class="center">
@@ -533,46 +573,6 @@ def build_home():
 </section>
 
 {materiais_section()}
-
-<section class="section about has-orbs" id="sobre" aria-labelledby="sobre-t">
-  {ORBS_C}
-  <div class="container about-grid">
-    <div class="about-photo reveal" data-depth="0.25">
-      <picture>
-        <source media="(max-width:600px)" srcset="/assets/img/ingrid-sorriso-520.webp">
-        <img src="/assets/img/ingrid-sorriso-800.webp" width="800" height="1000" alt="Ingrid Krichinak sorrindo, de colete preto, em fundo claro" loading="lazy" decoding="async">
-      </picture>
-    </div>
-    <div class="reveal">
-      <span class="eyebrow">Sobre</span>
-      <h2 id="sobre-t">Ingrid <em>Krichinak</em></h2>
-      <p class="lead">Nutricionista com foco em emagrecimento, pós-graduada em Nutrição, Fisiologia e Metabolismo no Esporte. Atendo em Santos e online.</p>
-      <p><strong>Minha missão é otimizar a rotina dos meus pacientes.</strong> Com os dias cada vez mais corridos, a gente precisa saber fazer escolhas práticas, gostosas e saudáveis, sem deixar de comer o que gosta. A abordagem respeita o contexto e os hábitos de cada pessoa, porque eu prezo por um estilo de vida sustentável.</p>
-      <p>Treino há 10 anos de musculação e 3 de CrossFit, e sei na prática que nunca existiu um mês perfeito. Teve fase de muito resultado, fase de manutenção, semana de treino reduzido e dia em que a alimentação saiu do planejado. É por isso que o meu trabalho não é sobre perfeição, é sobre construir um jeito de comer que você consiga sustentar.</p>
-      <p>Hoje também sou nutricionista da equipe de ginástica rítmica de competição da AABB e sigo estudando para levar aos meus pacientes estratégias atualizadas e baseadas em evidência.</p>
-      <div class="facts">
-        <div class="fact stat reveal"><strong><em>+</em><b data-count="500">500</b></strong><small>pacientes atendidos</small><span>Praticantes de atividade física, corredores, crossfit, musculação, atletas e quem busca mais qualidade de vida.</span></div>
-        <div class="fact stat reveal"><strong><em>+</em><b data-count="8">8</b></strong><small>países</small><span>Atendimento online para quem mora fora, adaptado à rotina e à cultura de cada lugar.</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section has-orbs" aria-labelledby="como-t">
-  {ORBS_D}
-  <div class="container">
-    <span class="eyebrow">Como funciona</span>
-    <h2 id="como-t">Do primeiro contato ao <em>acompanhamento</em></h2>
-    <ol class="steps">
-      <li class="reveal"><h3>Contato</h3><p>Você chama no WhatsApp e recebe as informações sobre formatos, valores e horários.</p></li>
-      <li class="reveal"><h3>Consulta</h3><p>Avaliação da sua rotina, histórico, objetivo, treino e preferências alimentares.</p></li>
-      <li class="reveal"><h3>Plano</h3><p>Plano alimentar individual e materiais de apoio para organizar a semana.</p></li>
-      <li class="reveal"><h3>Ajustes</h3><p>Suporte pelo WhatsApp e retornos para ajustar a estratégia sempre que for preciso.</p></li>
-    </ol>
-  </div>
-</section>
-
-{depoimentos_section()}
 
 <section class="section faq has-orbs" id="duvidas" aria-labelledby="faq-t">
   {ORBS_A}
