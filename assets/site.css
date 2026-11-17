@@ -462,3 +462,15 @@ html:not(.js) .reveal{opacity:1;transform:none;filter:none}
   .code-row{flex-direction:column;align-items:stretch;gap:8px}
   .code{justify-content:space-between}
 }
+
+/* ============ Depoimentos ============ */
+.section-head{margin-bottom:44px}
+.testimonials{columns:3 300px;column-gap:22px}
+.testimonial{break-inside:avoid;margin:0 0 22px;padding:28px 26px 24px;border-radius:var(--r);background:var(--glass);-webkit-backdrop-filter:blur(var(--glass-blur)) saturate(150%);backdrop-filter:blur(var(--glass-blur)) saturate(150%);border:1px solid var(--glass-border);box-shadow:var(--glass-shadow);position:relative}
+.testimonial::before{content:"\201C";position:absolute;right:22px;top:6px;font:400 4.2rem/1 var(--serif);color:var(--accent);opacity:.22}
+.testimonial .stars{display:block;color:#c9973f;letter-spacing:.18em;font-size:.86rem;margin-bottom:14px}
+.testimonial blockquote{margin:0}
+.testimonial blockquote p{margin:0;font:italic 400 1.22rem/1.45 var(--serif);color:var(--ink)}
+.testimonial figcaption{margin-top:16px;font-size:.74rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.testimonials-note{margin:10px auto 0;text-align:center;font-size:.85rem;color:var(--muted);max-width:62ch}
+@media (max-width:760px){.testimonial:nth-child(n+6){display:none}}

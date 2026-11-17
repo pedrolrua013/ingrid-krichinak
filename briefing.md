@@ -18,7 +18,7 @@
 - Hero: direção editorial (referência 21st.dev "editorial" + gradientes suaves), foto em arco, manchas de cor animadas em CSS puro.
 - Páginas por área: emagrecimento, hipertrofia, nutrição esportiva, acompanhamento em casal.
 - Formulário envia para o WhatsApp (sem e-mail de destino disponível). Nada é armazenado.
-- Depoimentos: seção despublicada (Código de Ética do CFN; validar com a Ingrid).
+- Depoimentos: publicados em 16/11 (Bruno) com 8 trechos do destaque "Feedback" do Instagram, sem nome, sem números de resultado e sem dados de saúde, com nota de que não são promessa de resultado. Chave `SHOW_DEPOIMENTOS` no build para despublicar. Validar com a Ingrid.
 - Sem preços (enviados pelo WhatsApp). Nenhuma promessa de resultado ou antes/depois.
 
 ## Atualização 16/11 (pedido do Pedro)
@@ -39,5 +39,6 @@
 
 ## Pendências
 - CRN (obrigatório pelo CFN). Enquanto vazio, o site sai com noindex. Preencher `CRN` em `_tools/build_pages.py` e rodar o build.
+- Depoimentos: Ingrid aprovar os trechos e a exibição (CFN). Se as avaliações forem do Google, linkar o perfil.
 - Cupons: confirmar se os 4 seguem ativos (DUX é de ~87 semanas atrás), os % da Dobro e da DUX, e o texto de transparência.
 - Domínio próprio, GTM/GA4 (`GTM_ID` em `assets/site.js`).

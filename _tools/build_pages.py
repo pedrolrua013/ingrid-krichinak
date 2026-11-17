@@ -167,6 +167,37 @@ HOME_FAQ = [
   ("Como agendo a primeira consulta?", f"Pelo WhatsApp {WA_DISPLAY}. Você recebe as informações sobre formatos, valores e horários disponíveis."),
 ]
 
+# ---------------- Depoimentos ----------------
+# Fonte: destaque "Feedback" do Instagram (avaliações com 5 estrelas, prints enviados pelo Bruno em 16/11/2026).
+# Sem nome, sem números de resultado, sem dados de saúde. Trechos com leve ajuste de pontuação.
+# Validar com a Ingrid antes de publicar (Código de Ética do CFN). False = seção some do site.
+SHOW_DEPOIMENTOS = True
+DEPOIMENTOS = [
+  "Pela primeira vez, estou conseguindo seguir uma dieta de forma leve, feliz e motivada. O plano alimentar é feito totalmente de acordo com a minha rotina e meus gostos, o que torna tudo muito mais fácil.",
+  "Me passou a melhor dieta que já fiz na vida, muito fácil de seguir e muito ajustada ao meu dia a dia. O suporte e acompanhamento do plano fazem toda a diferença para seguir firme nos objetivos.",
+  "Mudou minha forma de ver a nutrição! Sempre buscando fazer com que o seu objetivo seja alcançado da forma mais leve possível, sem fazer com que seu relacionamento com a comida seja rígido e monótono.",
+  "Muito atenciosa, cuida muito bem do paciente, sempre perguntando como as coisas estão no plano, se tem alguma dúvida, algum problema. Podem ir sem medo.",
+  "O plano alimentar é leve, sem aquelas restrições malucas, e adaptado ao que gostamos de comer. No plano temos diversas opções de substituição e também dicas de receitas.",
+  "Além dela ser atenciosa, profissional e presente, me sinto muito mais segura e confiante para seguir com meus objetivos, podendo entender melhor sobre alimentação e estilo de vida.",
+  "Excelente profissional, muito atenciosa, competente e atualizada. Atendimento personalizado e respeitando sempre as preferências e rotina de vida.",
+  "Ela explica tudo de um jeito simples. Os e-books dela são super completos e me ajudam muito, algo que nunca vi em outras nutris.",
+]
+
+def depoimentos_section():
+    if not SHOW_DEPOIMENTOS:
+        return ""
+    stars = '<span class="stars" aria-label="5 de 5 estrelas">★★★★★</span>'
+    items = "".join(f'<figure class="testimonial reveal">{stars}<blockquote><p>{html.escape(t)}</p></blockquote><figcaption>Paciente</figcaption></figure>' for t in DEPOIMENTOS)
+    return f'''<section class="section has-orbs" id="depoimentos" aria-labelledby="dep-t">
+  {ORBS_D}
+  <div class="container">
+    <div class="section-head center"><span class="eyebrow">Feedbacks</span><h2 id="dep-t">O que dizem sobre o <em>acompanhamento</em></h2>
+    <p class="lead">Avaliações deixadas por pacientes, reproduzidas sem identificação.</p></div>
+    <div class="testimonials">{items}</div>
+    <p class="testimonials-note">Cada pessoa tem um processo individual. Os relatos falam da experiência de atendimento e não representam promessa de resultado.</p>
+  </div>
+</section>'''
+
 # ---------------- Cupons ----------------
 # Fonte: destaque "Cupons" do Instagram (prints enviados pelo Bruno em 16/11/2026).
 # Validar com a Ingrid: se os códigos seguem ativos e a declaração de parceria.
@@ -463,9 +494,7 @@ def build_home():
   </div>
 </section>
 
-<!-- Depoimentos: seção despublicada até validação com a Ingrid (Código de Ética do CFN). Código preservado abaixo.
-<section class="section" id="depoimentos"></section>
--->
+{depoimentos_section()}
 
 <section class="section faq has-orbs" id="duvidas" aria-labelledby="faq-t">
   {ORBS_A}
