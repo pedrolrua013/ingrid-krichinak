@@ -478,7 +478,7 @@ html:not(.js) .reveal{opacity:1;transform:none;filter:none}
 .carousel-ui{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:-8px}
 .carousel-btn{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;cursor:pointer;color:var(--ink);background:var(--glass);border:1px solid var(--glass-border);box-shadow:var(--glass-shadow);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);transition:background .3s,color .3s,transform .3s var(--ease)}
 .carousel-btn svg{width:20px;height:20px}
-.carousel-btn:hover{background:var(--ink);color:var(--cream);transform:scale(1.08)}
+.carousel-btn:hover,.carousel-btn:active{background:var(--accent);border-color:var(--accent);color:#fff;transform:scale(1.08);box-shadow:0 14px 30px -14px rgba(168,50,42,.6)}
 .carousel-btn:disabled{opacity:.35;pointer-events:none}
 .carousel-dots{display:flex;gap:8px}
 .carousel-dots button{width:8px;height:8px;padding:0;border:0;border-radius:99px;background:rgba(27,24,22,.2);cursor:pointer;transition:width .45s var(--ease),background .3s}
