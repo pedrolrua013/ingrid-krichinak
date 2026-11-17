@@ -626,7 +626,6 @@ def build_coupons():
 <main id="conteudo">
 <section class="page-hero coupons-hero">
   <div class="container">
-    <nav class="crumbs" aria-label="Você está em"><a href="/">Início</a><span>/</span>Cupons</nav>
     <span class="eyebrow">Parcerias</span>
     <h1>Cupons de <em>parceiros</em></h1>
     <p class="lead">Marcas que fazem parte da rotina da Ingrid. Toque no código para copiar.</p>

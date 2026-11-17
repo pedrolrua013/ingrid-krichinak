@@ -518,7 +518,7 @@ body.leaving{opacity:0;transform:translateY(-14px)}
 }
 
 /* ============ Cupons: topo editorial ============ */
-.coupons-hero{background:linear-gradient(180deg,var(--stone) 0%,var(--bg) 100%);padding:clamp(124px,12vw,156px) 0 8px;text-align:center}
+.coupons-hero{background:linear-gradient(180deg,var(--stone) 0%,var(--bg) 100%);padding:clamp(132px,13vw,168px) 0 8px;text-align:center}
 .coupons-hero::before{width:420px;height:420px;right:auto;left:50%;margin-left:-210px;top:-230px;opacity:.75}
 .coupons-hero .crumbs{font-size:.76rem;letter-spacing:.04em;margin-bottom:30px}
 .coupons-hero .crumbs span{margin:0 6px;opacity:.6}
