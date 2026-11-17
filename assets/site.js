@@ -108,6 +108,17 @@
     c.addEventListener("pointerleave", function(){ c.style.setProperty("--rx","0deg"); c.style.setProperty("--ry","0deg"); });
   });
 
+  // E-books: inclinação 3D seguindo o cursor
+  d.querySelectorAll(".ebook").forEach(function(c){
+    var t = c.querySelector(".tablet"); if(!t || !FINE || REDUCED) return;
+    c.addEventListener("pointermove", function(e){
+      var r = t.getBoundingClientRect(), px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+      t.style.setProperty("--mx", (px * 100) + "%"); t.style.setProperty("--my", (py * 100) + "%");
+      t.style.setProperty("--ry", ((px - .5) * 10).toFixed(2) + "deg"); t.style.setProperty("--rx", ((.5 - py) * 10).toFixed(2) + "deg");
+    });
+    c.addEventListener("pointerleave", function(){ t.style.setProperty("--rx","0deg"); t.style.setProperty("--ry","0deg"); });
+  });
+
   // Botões magnéticos
   if(FINE && !REDUCED){
     d.querySelectorAll(".btn, .wa-float").forEach(function(btn){

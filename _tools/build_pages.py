@@ -205,6 +205,38 @@ def depoimentos_section():
   </div>
 </section>'''
 
+# ---------------- Materiais (plano premium) ----------------
+# Fonte: site da Ingrid no Canva (print enviado pelo Bruno em 16/11/2026). Trocar pelos originais em alta quando houver.
+EBOOKS = [
+  ("trocas-inteligentes-bebidas", "Trocas inteligentes: bebidas alcoólicas"),
+  ("receitas-airfryer", "Receitas saudáveis e deliciosas na airfryer"),
+  ("reducao-de-danos-fim-de-semana", "Redução de danos no fim de semana"),
+  ("marmitas-da-semana", "Passo a passo para preparar as marmitas da semana"),
+  ("variar-verduras", "Formas de variar o consumo de verduras"),
+  ("guia-produtos-suplementos", "Guia de produtos e suplementos"),
+]
+PLANNERS = [
+  ("planner-cardapio-semanal", "Cardápio semanal", 340, 237),
+  ("planner-habitos", "Planner de hábitos", 333, 237),
+]
+
+def materiais_section():
+    books = "".join(f'''<figure class="ebook reveal"><div class="tablet"><img src="/assets/img/materiais/{f}.webp" width="188" height="255" alt="Capa do e-book {html.escape(t)}" loading="lazy" decoding="async"><span class="glare" aria-hidden="true"></span></div><figcaption>{html.escape(t)}</figcaption></figure>''' for f, t in EBOOKS)
+    planners = "".join(f'''<figure class="planner reveal"><img src="/assets/img/materiais/{f}.webp" width="{w}" height="{h}" alt="{html.escape(t)} para imprimir e preencher na semana" loading="lazy" decoding="async"><figcaption>{html.escape(t)}</figcaption></figure>''' for f, t, w, h in PLANNERS)
+    return f'''<section class="section materiais has-orbs" id="materiais" aria-labelledby="materiais-t">
+  {ORBS_C}
+  <div class="container">
+    <div class="center section-head">
+      <span class="eyebrow">Acompanhamento completo</span>
+      <h2 id="materiais-t">Materiais <em>exclusivos</em> para o seu dia a dia</h2>
+      <p class="lead">E-books e planners que acompanham o plano para facilitar as escolhas da semana, das compras ao fim de semana.</p>
+    </div>
+    <div class="ebooks" data-lenis-prevent>{books}</div>
+    <div class="planners-head center"><span class="eyebrow">Planners</span><h3>Organização semanal</h3></div>
+    <div class="planners">{planners}</div>
+  </div>
+</section>'''
+
 # ---------------- Cupons ----------------
 # Fonte: destaque "Cupons" do Instagram (prints enviados pelo Bruno em 16/11/2026).
 # Validar com a Ingrid: se os códigos seguem ativos e a declaração de parceria.
@@ -450,7 +482,7 @@ def build_home():
         <span class="tag">Mais completo</span>
         <h3>Acompanhamento completo</h3>
         <p>Consultas, plano individual e todo o suporte para mudar a rotina com segurança. Presencial em Santos ou online.</p>
-        <ul><li>Consultas de avaliação e retorno</li><li>Plano alimentar individual</li><li>Suporte contínuo no WhatsApp</li><li>Materiais exclusivos de apoio</li></ul>
+        <ul><li>Consultas de avaliação e retorno</li><li>Plano alimentar individual</li><li>Suporte contínuo no WhatsApp</li><li><a class="plan-link" href="#materiais">Materiais exclusivos de apoio</a></li></ul>
         <a class="btn btn-light" href="{wa('Olá, Ingrid! Vim pelo site e quero saber sobre o acompanhamento completo.')}" target="_blank" rel="noopener" data-cta="plano-completo">Quero saber mais</a>
       </div>
       <div class="plan reveal">
@@ -463,6 +495,8 @@ def build_home():
     </div>
   </div>
 </section>
+
+{materiais_section()}
 
 <section class="section about has-orbs" id="sobre" aria-labelledby="sobre-t">
   {ORBS_C}

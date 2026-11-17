@@ -30,6 +30,10 @@
 - /cupons/ com os códigos do destaque "Cupons" do Instagram: Liv Up (ingrid.krichinak1 30% 1ª compra; ingrid.krichinak 10% demais), Ocean Drop (INGRIDK 20%), Dobro (DOBROINGRIDK), DUX (PACINGRIDFARIA). Dados em `COUPONS` no build.
 - No menu e no rodapé, com link para a loja oficial de cada marca (rel=sponsored). Bloco de transparência removido a pedido do Bruno em 16/11. Atenção: o novo Código de Ética do CFN (Res. 856/2026) exige declaração ostensiva de conflito de interesses nessas parcerias; confirmar com a Ingrid.
 
+## Atualização 16/11 (Bruno): materiais exclusivos
+- Seção #materiais na home (entre formatos e sobre): 6 capas de e-books em moldura de tablet + 2 planners (cardápio semanal e hábitos), recortadas de um print do site da Ingrid no Canva. "Materiais exclusivos de apoio" no plano completo linka para a seção.
+- Pendente: pegar as capas e planners originais em alta (Canva) para trocar os arquivos em `assets/img/materiais/` (mesmos nomes).
+
 ## Inferências a validar com a Ingrid
 - Nome e conteúdo dos 3 formatos (Consultoria online, Acompanhamento completo, Plano de manutenção) — baseados nos stories de 2024.
 - "Método PR": mantido só como nome (não expandido).
