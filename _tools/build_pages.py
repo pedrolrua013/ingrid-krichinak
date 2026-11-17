@@ -209,13 +209,13 @@ def depoimentos_section():
 # Fonte: destaque "Cupons" do Instagram (prints enviados pelo Bruno em 16/11/2026).
 # Validar com a Ingrid: se os códigos seguem ativos e a declaração de parceria.
 COUPONS = [
-  {"brand": "Liv Up", "cat": "Marmitas congeladas", "desc": "Refeições prontas para as semanas mais corridas.",
+  {"brand": "Liv Up", "url": "https://www.livup.com.br/", "cat": "Marmitas congeladas", "desc": "Refeições prontas para as semanas mais corridas.",
    "codes": [("30% na 1ª compra", "ingrid.krichinak1"), ("10% nas demais compras", "ingrid.krichinak")]},
-  {"brand": "Ocean Drop", "cat": "Eletrólitos e suplementos", "desc": "Hidratação e reposição de eletrólitos.",
+  {"brand": "Ocean Drop", "url": "https://www.oceandrop.com.br/", "cat": "Eletrólitos e suplementos", "desc": "Hidratação e reposição de eletrólitos.",
    "codes": [("20% de desconto", "INGRIDK")]},
-  {"brand": "Dobro", "cat": "Géis de carboidrato", "desc": "Carboidrato para treinos longos, provas e intra-treino.",
+  {"brand": "Dobro", "url": "https://www.soudobro.com.br/", "cat": "Géis de carboidrato", "desc": "Carboidrato para treinos longos, provas e intra-treino.",
    "codes": [("Desconto na loja Dobro", "DOBROINGRIDK")]},
-  {"brand": "DUX Nutrition", "cat": "Whey e suplementos", "desc": "Proteína e suplementação esportiva.",
+  {"brand": "DUX Nutrition", "url": "https://www.duxnutrition.com/", "cat": "Whey e suplementos", "desc": "Proteína e suplementação esportiva.",
    "codes": [("Desconto na loja DUX", "PACINGRIDFARIA")]},
 ]
 
@@ -620,7 +620,8 @@ def build_coupons():
         codes = "".join(f'''<div class="code-row"><span class="code-label">{html.escape(lbl)}</span>
           <button class="code" type="button" data-copy="{html.escape(code)}" aria-label="Copiar cupom {html.escape(code)}"><span>{html.escape(code)}</span>{ICON_COPY}<em aria-hidden="true">Copiado</em></button></div>''' for lbl, code in c["codes"])
         cards += f'''<article class="card coupon reveal"><span class="num">0{i+1}</span><span class="coupon-cat">{html.escape(c["cat"])}</span>
-        <h3>{html.escape(c["brand"])}</h3><p>{html.escape(c["desc"])}</p>{codes}</article>'''
+        <h3>{html.escape(c["brand"])}</h3><p>{html.escape(c["desc"])}</p>{codes}
+        <a class="link-arrow coupon-link" href="{c["url"]}" target="_blank" rel="noopener sponsored" data-cta="cupom-loja">Ir para a loja {html.escape(c["brand"])}</a></article>'''
     body = f'''{nav()}
 <main id="conteudo">
 <section class="page-hero">
@@ -628,18 +629,14 @@ def build_coupons():
     <nav class="crumbs" aria-label="Você está em"><a href="/">Início</a><span>/</span>Cupons</nav>
     <span class="eyebrow">Parcerias</span>
     <h1>Cupons de <em>parceiros</em></h1>
-    <p class="lead">Descontos em marcas que fazem parte da rotina da Ingrid. Toque no código para copiar e use no site ou app da marca.</p>
+    <p class="lead">Descontos em marcas que fazem parte da rotina da Ingrid. Toque no código para copiar e use na loja da marca.</p>
   </div>
 </section>
 <section class="section has-orbs">
   {ORBS_B}
   <div class="container">
     <div class="coupons">{cards}</div>
-    <aside class="disclosure reveal" aria-label="Declaração de parceria">
-      <h2>Transparência</h2>
-      <p>Estes cupons vêm de parcerias comerciais entre a Ingrid e as marcas, que podem gerar benefício para ela quando o código é usado. Usar um cupom é uma escolha sua: não faz parte da prescrição individual e não substitui a orientação de um nutricionista. Validade, regras e valor de cada desconto são definidos pelas marcas e podem mudar sem aviso.</p>
-      <a class="link-arrow" href="{wa("Olá, Ingrid! Vim pela página de cupons e quero saber mais sobre o acompanhamento.")}" target="_blank" rel="noopener" data-cta="cupons">Quero um plano feito para mim</a>
-    </aside>
+    <p class="coupons-cta reveal"><a class="link-arrow" href="{wa("Olá, Ingrid! Vim pela página de cupons e quero saber mais sobre o acompanhamento.")}" target="_blank" rel="noopener" data-cta="cupons">Quero um plano feito para mim</a></p>
   </div>
 </section>
 </main>

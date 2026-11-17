@@ -487,3 +487,5 @@ html:not(.js) .reveal{opacity:1;transform:none;filter:none}
 @media (max-width:980px){.testimonial{flex-basis:calc((100% - 22px) / 2)}}
 @media (max-width:640px){.testimonial{flex-basis:86%}.carousel-track{gap:14px}}
 @media (prefers-reduced-motion:reduce){.carousel-track{scroll-behavior:auto}}
+.coupon-link{margin-top:auto;padding-top:18px;font-size:.92rem}
+.coupons-cta{text-align:center;margin:34px 0 0}

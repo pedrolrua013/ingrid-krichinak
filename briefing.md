@@ -28,7 +28,7 @@
 
 ## Atualização 16/11 (Bruno): página de cupons
 - /cupons/ com os códigos do destaque "Cupons" do Instagram: Liv Up (ingrid.krichinak1 30% 1ª compra; ingrid.krichinak 10% demais), Ocean Drop (INGRIDK 20%), Dobro (DOBROINGRIDK), DUX (PACINGRIDFARIA). Dados em `COUPONS` no build.
-- Fica fora do menu e da home (link só no rodapé), com declaração de parceria visível. Novo Código de Ética do CFN (Res. 856/2026) exige declaração ostensiva de conflito de interesses e veda vincular marcas à prescrição individual.
+- No menu e no rodapé, com link para a loja oficial de cada marca (rel=sponsored). Bloco de transparência removido a pedido do Bruno em 16/11. Atenção: o novo Código de Ética do CFN (Res. 856/2026) exige declaração ostensiva de conflito de interesses nessas parcerias; confirmar com a Ingrid.
 
 ## Inferências a validar com a Ingrid
 - Nome e conteúdo dos 3 formatos (Consultoria online, Acompanhamento completo, Plano de manutenção) — baseados nos stories de 2024.
@@ -40,5 +40,5 @@
 ## Pendências
 - CRN (obrigatório pelo CFN). Enquanto vazio, o site sai com noindex. Preencher `CRN` em `_tools/build_pages.py` e rodar o build.
 - Depoimentos: Ingrid aprovar os trechos e a exibição (CFN). Se as avaliações forem do Google, linkar o perfil.
-- Cupons: confirmar se os 4 seguem ativos (DUX é de ~87 semanas atrás), os % da Dobro e da DUX, e o texto de transparência.
+- Cupons: confirmar se os 4 seguem ativos (DUX é de ~87 semanas atrás), os % da Dobro e da DUX, e se ela quer uma declaração de parceria (CFN).
 - Domínio próprio, GTM/GA4 (`GTM_ID` em `assets/site.js`).
