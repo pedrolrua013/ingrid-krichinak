@@ -262,4 +262,18 @@
     buildDots();
     if("IntersectionObserver" in window){ new IntersectionObserver(function(es){ if(es[0].isIntersecting) restart(); else clearInterval(timer); }).observe(car); } else restart();
   });
+
+  // Transição entre páginas: fallback quando não há View Transitions entre documentos
+  if(!("CSSViewTransitionRule" in window) && !REDUCED){
+    d.addEventListener("click", function(e){
+      var a = e.target.closest && e.target.closest("a[href]");
+      if(!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      if(a.target && a.target !== "_self") return;
+      var u = new URL(a.href, location.href);
+      if(u.origin !== location.origin || (u.pathname === location.pathname && u.search === location.search)) return;
+      e.preventDefault(); b.classList.add("leaving");
+      setTimeout(function(){ location.href = u.href; }, 260);
+    });
+    window.addEventListener("pageshow", function(){ b.classList.remove("leaving"); });
+  }
 })();

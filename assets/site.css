@@ -499,3 +499,20 @@ html:not(.js) .reveal{opacity:1;transform:none;filter:none}
 @media (prefers-reduced-motion:reduce){
   .page-hero .crumbs,.page-hero .eyebrow,.page-hero h1,.page-hero .lead,.page-hero .hero-ctas,.page-hero::before{animation:none}
 }
+
+/* ============ Transição entre páginas ============ */
+@view-transition{navigation:auto}
+.nav{view-transition-name:site-nav}
+.wa-float{view-transition-name:wa-float}
+::view-transition-group(site-nav),::view-transition-group(wa-float){animation:none}
+::view-transition-old(root){animation:vtOut .38s cubic-bezier(.4,0,.2,1) both}
+::view-transition-new(root){animation:vtIn .7s cubic-bezier(.22,1,.36,1) both}
+@keyframes vtOut{to{opacity:0;transform:translateY(-28px);filter:blur(4px)}}
+@keyframes vtIn{from{opacity:0;transform:translateY(36px);filter:blur(6px)}}
+/* Fallback (navegadores sem View Transitions entre páginas) */
+body{transition:opacity .28s ease,transform .28s ease}
+body.leaving{opacity:0;transform:translateY(-14px)}
+@media (prefers-reduced-motion:reduce){
+  ::view-transition-old(root),::view-transition-new(root){animation:none}
+  body{transition:none}
+}
