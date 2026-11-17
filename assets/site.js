@@ -40,7 +40,7 @@
   // Smooth scroll (Lenis)
   var lenis = null;
   if(!REDUCED && window.Lenis){
-    lenis = new window.Lenis({duration:1.15, easing:function(t){return Math.min(1, 1.001 - Math.pow(2, -10 * t));}, anchors:{offset:-80}, smoothWheel:true});
+    lenis = new window.Lenis({duration:1.15, easing:function(t){return Math.min(1, 1.001 - Math.pow(2, -10 * t));}, anchors:{offset:-80}, smoothWheel:true, allowNestedScroll:true});
   }
 
   // Reveal on scroll, com escalonamento entre irmãos

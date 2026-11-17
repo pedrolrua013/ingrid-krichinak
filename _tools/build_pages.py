@@ -194,7 +194,7 @@ def depoimentos_section():
     <div class="section-head center"><span class="eyebrow">Feedbacks</span><h2 id="dep-t">O que dizem sobre o <em>acompanhamento</em></h2>
     <p class="lead">Avaliações deixadas por pacientes, reproduzidas sem identificação.</p></div>
     <div class="carousel" data-carousel>
-      <div class="carousel-track" tabindex="0" role="region" aria-roledescription="carrossel" aria-label="Feedbacks de pacientes" data-lenis-prevent>{items}</div>
+      <div class="carousel-track" tabindex="0" role="region" aria-roledescription="carrossel" aria-label="Feedbacks de pacientes">{items}</div>
       <div class="carousel-ui">
         <button class="carousel-btn" type="button" data-dir="-1" aria-label="Feedback anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
         <div class="carousel-dots" role="tablist" aria-label="Escolher feedback"></div>
@@ -268,7 +268,7 @@ def materiais_section():
     </div>
 
     <div class="tier-head premium reveal"><span class="eyebrow">Exclusivos do acompanhamento completo</span><h3>Materiais para ir <em>além</em></h3><p>E-books personalizados de acordo com as suas dúvidas e planners para a organização semanal.</p></div>
-    <div class="ebooks" data-lenis-prevent>{books}</div>
+    <div class="ebooks">{books}</div>
     <div class="planners">{planners}</div>
   </div>
 </section>'''
