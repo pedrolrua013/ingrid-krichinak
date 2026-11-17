@@ -305,7 +305,7 @@ def footer(wa_msg="Olá, Ingrid! Vim pelo site e quero falar com você."):
     </div>
     <div class="footer-bottom">
       <span>© {datetime.date.today().year} {NAME} · Nutricionista{crn}</span>
-      <span>Site por Jagua Media</span>
+      <span>Site por <a href="https://www.instagram.com/cproject.dev/" target="_blank" rel="noopener">CProject Lab</a></span>
     </div>
   </div>
 </footer>

@@ -196,4 +196,35 @@
       function fallback(){ var t = d.createElement("textarea"); t.value = code; t.setAttribute("readonly",""); t.style.position = "fixed"; t.style.opacity = "0"; b.appendChild(t); t.select(); try{ d.execCommand("copy"); done(); }catch(e){} b.removeChild(t); }
     });
   });
+
+  // FAQ: animação de expansão (sanfona)
+  d.querySelectorAll(".faq details").forEach(function(det){
+    var sum = det.querySelector("summary"), anim = null, closing = false;
+    if(!sum || !det.animate) return;
+    function finish(open){ det.open = open; anim = null; closing = false; det.style.height = det.style.overflow = ""; }
+    function shrink(){
+      closing = true; det.style.overflow = "hidden";
+      var from = det.offsetHeight + "px", to = sum.offsetHeight + "px";
+      if(anim) anim.cancel();
+      anim = det.animate({height:[from,to]},{duration:REDUCED ? 0 : 380, easing:"cubic-bezier(.22,1,.36,1)"});
+      anim.onfinish = function(){ finish(false); }; anim.oncancel = function(){ closing = false; };
+    }
+    function expand(){
+      det.style.overflow = "hidden";
+      var from = det.offsetHeight + "px"; det.open = true;
+      var to = det.scrollHeight + "px";
+      if(anim) anim.cancel();
+      anim = det.animate({height:[from,to]},{duration:REDUCED ? 0 : 480, easing:"cubic-bezier(.22,1,.36,1)"});
+      anim.onfinish = function(){ finish(true); };
+      var c = det.querySelector("p");
+      if(c && !REDUCED) c.animate({opacity:[0,1],transform:["translateY(-8px)","none"]},{duration:420, delay:80, easing:"ease-out", fill:"backwards"});
+    }
+    sum.addEventListener("click", function(e){
+      e.preventDefault();
+      if(closing || !det.open){
+        det.parentNode.querySelectorAll("details[open]").forEach(function(o){ if(o !== det) o.querySelector("summary").click(); });
+        expand();
+      } else { shrink(); }
+    });
+  });
 })();
