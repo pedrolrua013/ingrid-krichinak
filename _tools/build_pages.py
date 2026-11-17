@@ -187,13 +187,20 @@ def depoimentos_section():
     if not SHOW_DEPOIMENTOS:
         return ""
     stars = '<span class="stars" aria-label="5 de 5 estrelas">★★★★★</span>'
-    items = "".join(f'<figure class="testimonial reveal">{stars}<blockquote><p>{html.escape(t)}</p></blockquote><figcaption>Paciente</figcaption></figure>' for t in DEPOIMENTOS)
+    items = "".join(f'<figure class="card testimonial reveal">{stars}<blockquote><p>{html.escape(t)}</p></blockquote><figcaption>Paciente</figcaption></figure>' for t in DEPOIMENTOS)
     return f'''<section class="section has-orbs" id="depoimentos" aria-labelledby="dep-t">
   {ORBS_D}
   <div class="container">
     <div class="section-head center"><span class="eyebrow">Feedbacks</span><h2 id="dep-t">O que dizem sobre o <em>acompanhamento</em></h2>
     <p class="lead">Avaliações deixadas por pacientes, reproduzidas sem identificação.</p></div>
-    <div class="testimonials">{items}</div>
+    <div class="carousel" data-carousel>
+      <div class="carousel-track" tabindex="0" role="region" aria-roledescription="carrossel" aria-label="Feedbacks de pacientes" data-lenis-prevent>{items}</div>
+      <div class="carousel-ui">
+        <button class="carousel-btn" type="button" data-dir="-1" aria-label="Feedback anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <div class="carousel-dots" role="tablist" aria-label="Escolher feedback"></div>
+        <button class="carousel-btn" type="button" data-dir="1" aria-label="Próximo feedback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+    </div>
     <p class="testimonials-note">Cada pessoa tem um processo individual. Os relatos falam da experiência de atendimento e não representam promessa de resultado.</p>
   </div>
 </section>'''
@@ -213,7 +220,7 @@ COUPONS = [
 ]
 
 # ---------------- Templates ----------------
-NAV_ITEMS = [("/#metodo","Método"),("/#atendimento","Atendimento"),("/#sobre","Sobre"),("/#duvidas","Dúvidas"),("/#contato","Contato")]
+NAV_ITEMS = [("/#metodo","Método"),("/#atendimento","Atendimento"),("/#sobre","Sobre"),("/#duvidas","Dúvidas"),("/cupons/","Cupons"),("/#contato","Contato")]
 
 def head(title, desc, path, extra_ld=None, preload_img=None):
     url = SITE + path
