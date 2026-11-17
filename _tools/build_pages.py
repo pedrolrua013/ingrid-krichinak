@@ -487,7 +487,7 @@ def build_home():
       <p>Hoje também sou nutricionista da equipe de ginástica rítmica de competição da AABB e sigo estudando para levar aos meus pacientes estratégias atualizadas e baseadas em evidência.</p>
       <div class="facts">
         <div class="fact stat reveal"><strong><em>+</em><b data-count="500">500</b></strong><small>pacientes atendidos</small><span>Praticantes de atividade física, corredores, crossfit, musculação, atletas e quem busca mais qualidade de vida.</span></div>
-        <div class="fact stat reveal"><strong><em>+</em><b data-count="8">8</b></strong><small>países</small><span>Atendimento online para quem mora fora, adaptado à rotina e à cultura de cada lugar.</span></div>
+        <div class="fact stat globe-card reveal"><canvas class="globe" data-globe aria-hidden="true"></canvas><strong><em>+</em><b data-count="8">8</b></strong><small>países</small><span>Atendimento online para quem mora fora, adaptado à rotina e à cultura de cada lugar.</span></div>
       </div>
     </div>
   </div>

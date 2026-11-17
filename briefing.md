@@ -38,6 +38,9 @@
 - Do site da Ingrid no Canva: pós-graduada em Nutrição, Fisiologia e Metabolismo no Esporte; missão "otimizar a rotina dos pacientes"; +500 e +8 países.
 - Adaptado por causa do CFN: "+500 vidas transformadas" virou "+500 pacientes atendidos" (sem alegação de resultado) e "especialista em emagrecimento" virou "com foco em emagrecimento" (o título de especialista exige registro). Confirmar com a Ingrid.
 
+## +8 países: globo animado
+- Canvas no card "+8 países": globo pontilhado (pontos de terra em `assets/globe-land.json`, carregado só quando o card aparece), Santos pulsando e arcos para 7 destinos ilustrativos (Lisboa, Madri, Londres, Roma, Miami, Toronto, Buenos Aires). Trocar `DEST` em `assets/site.js` pelos países reais da Ingrid.
+
 ## Inferências a validar com a Ingrid
 - Nome e conteúdo dos 3 formatos (Consultoria online, Acompanhamento completo, Plano de manutenção) — baseados nos stories de 2024.
 - "Método PR": mantido só como nome (não expandido).

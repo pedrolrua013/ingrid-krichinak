@@ -302,4 +302,74 @@
     }, {threshold:.6});
     counters.forEach(function(el){ cio.observe(el); });
   }
+
+  // +8 países: globo pontilhado com conexões a partir de Santos
+  var gc = d.querySelector("[data-globe]");
+  if(gc && gc.getContext && "IntersectionObserver" in window){
+    var ctx = gc.getContext("2d"), land = null, running = false, t0 = 0, raf2 = 0;
+    var D2R = Math.PI / 180;
+    // Santos + destinos ilustrativos (trocar pelos países reais quando houver)
+    var HOME = [-23.96, -46.33];
+    var DEST = [[38.72,-9.14],[40.42,-3.7],[51.5,-0.12],[41.9,12.5],[25.76,-80.19],[43.65,-79.38],[-34.6,-58.38]];
+    function size(){ var r = gc.getBoundingClientRect(), dpr = Math.min(2, window.devicePixelRatio || 1); gc.width = r.width * dpr; gc.height = r.height * dpr; ctx.setTransform(dpr,0,0,dpr,0,0); return r.width; }
+    var W = 0;
+    function vec(lat, lon){ lat *= D2R; lon *= D2R; return [Math.cos(lat)*Math.cos(lon), Math.cos(lat)*Math.sin(lon), Math.sin(lat)]; }
+    function proj(v, lon0, lat0, R, cx, cy){
+      var cl = Math.cos(lon0), sl = Math.sin(lon0), x = v[0]*cl + v[1]*sl, yv = -v[0]*sl + v[1]*cl, z = v[2];
+      var c0 = Math.cos(lat0), s0 = Math.sin(lat0), depth = x*c0 + z*s0, up = -x*s0 + z*c0;
+      return [cx + yv*R, cy - up*R, depth];
+    }
+    function slerp(a, b, t){
+      var dot = Math.max(-1, Math.min(1, a[0]*b[0]+a[1]*b[1]+a[2]*b[2])), om = Math.acos(dot), so = Math.sin(om) || 1e-6;
+      var k1 = Math.sin((1-t)*om)/so, k2 = Math.sin(t*om)/so; return [a[0]*k1+b[0]*k2, a[1]*k1+b[1]*k2, a[2]*k1+b[2]*k2];
+    }
+    var home = vec(HOME[0], HOME[1]), dests = DEST.map(function(p){ return vec(p[0], p[1]); });
+    function draw(ms){
+      var t = ms / 1000, R = W * .44, cx = W / 2, cy = W / 2;
+      var lon0 = (-30 + 38 * Math.sin(t * .12)) * D2R, lat0 = 8 * D2R;
+      ctx.clearRect(0, 0, W, W);
+      var g = ctx.createRadialGradient(cx - R*.3, cy - R*.35, R*.1, cx, cy, R);
+      g.addColorStop(0, "rgba(255,255,255,.75)"); g.addColorStop(1, "rgba(235,230,223,.35)");
+      ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI*2); ctx.fillStyle = g; ctx.fill();
+      ctx.lineWidth = 1; ctx.strokeStyle = "rgba(27,24,22,.10)"; ctx.stroke();
+      for(var i = 0; i < land.length; i += 2){
+        var p = proj(vec(land[i]/10, land[i+1]/10), lon0, lat0, R, cx, cy);
+        if(p[2] <= 0) continue;
+        ctx.fillStyle = "rgba(27,24,22," + (.12 + .45*p[2]).toFixed(3) + ")";
+        ctx.fillRect(p[0]-.8, p[1]-.8, 1.6, 1.6);
+      }
+      var hp = proj(home, lon0, lat0, R, cx, cy);
+      dests.forEach(function(dv, k){
+        var cyc = REDUCED ? 1 : ((t * .35 + k * .37) % 2.2) / 1.6, prog = Math.min(1, cyc), fade = cyc > 1 ? Math.max(0, 1 - (cyc - 1) / .6) : 1;
+        var N = 36, last = null; ctx.strokeStyle = "rgba(168,50,42," + (.75 * fade).toFixed(3) + ")"; ctx.lineWidth = 1.2; ctx.beginPath();
+        for(var j = 0; j <= N * prog; j++){
+          var f = j / N, v = slerp(home, dv, f), lift = 1 + .22 * Math.sin(Math.PI * f), q = proj([v[0]*lift, v[1]*lift, v[2]*lift], lon0, lat0, R, cx, cy);
+          if(q[2] > -.15){ if(last) ctx.lineTo(q[0], q[1]); else ctx.moveTo(q[0], q[1]); last = q; } else last = null;
+        }
+        ctx.stroke();
+        var dp = proj(dv, lon0, lat0, R, cx, cy);
+        if(dp[2] > 0 && prog >= 1){ ctx.fillStyle = "rgba(168,50,42," + (.9 * fade + .25).toFixed(3) + ")"; ctx.beginPath(); ctx.arc(dp[0], dp[1], 2.2, 0, Math.PI*2); ctx.fill(); }
+      });
+      if(hp[2] > 0){
+        var pulse = REDUCED ? 0 : (t % 1.8) / 1.8;
+        ctx.strokeStyle = "rgba(168,50,42," + (.6 * (1 - pulse)).toFixed(3) + ")"; ctx.lineWidth = 1.2;
+        ctx.beginPath(); ctx.arc(hp[0], hp[1], 3 + pulse * 10, 0, Math.PI*2); ctx.stroke();
+        ctx.fillStyle = "#a8322a"; ctx.beginPath(); ctx.arc(hp[0], hp[1], 3.2, 0, Math.PI*2); ctx.fill();
+      }
+    }
+    function loop(ms){ if(!running) return; draw(ms - t0); raf2 = requestAnimationFrame(loop); }
+    function start(){
+      if(!land) return;
+      W = size(); gc.classList.add("ready");
+      if(REDUCED){ draw(0); return; }
+      if(!running){ running = true; t0 = performance.now() - (t0 ? 0 : 0); raf2 = requestAnimationFrame(loop); }
+    }
+    new IntersectionObserver(function(es){
+      if(es[0].isIntersecting){
+        if(land) start();
+        else fetch("/assets/globe-land.json").then(function(r){ return r.json(); }).then(function(a){ land = a; start(); }).catch(function(){});
+      } else { running = false; cancelAnimationFrame(raf2); }
+    }, {rootMargin:"120px"}).observe(gc);
+    window.addEventListener("resize", function(){ if(land){ W = size(); if(REDUCED) draw(0); } });
+  }
 })();

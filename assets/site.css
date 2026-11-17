@@ -606,3 +606,13 @@ body.leaving{opacity:0;transform:translateY(-14px)}
 .planner:hover figcaption{color:var(--accent);letter-spacing:.2em;transform:translateY(-4px)}
 .ebook figcaption{transition:color .4s var(--ease),transform .5s var(--ease)}
 .ebook:hover figcaption{transform:translateY(-4px)}
+
+/* +8 países: globo */
+.globe-card{overflow:hidden;isolation:isolate}
+.globe-card>*:not(.globe){position:relative;z-index:1}
+.globe-card span{max-width:64%}
+.globe{position:absolute;z-index:0;right:-34px;top:50%;width:200px;height:200px;transform:translateY(-50%);pointer-events:none;opacity:0;transition:opacity 1.2s var(--ease)}
+.globe.ready{opacity:1}
+@media (max-width:420px){.globe{width:170px;height:170px;right:-40px}.globe-card span{max-width:60%}}
+.globe{right:-56px;width:210px;height:210px;-webkit-mask-image:linear-gradient(90deg,transparent 4%,#000 42%);mask-image:linear-gradient(90deg,transparent 4%,#000 42%)}
+.globe-card span{max-width:58%}
