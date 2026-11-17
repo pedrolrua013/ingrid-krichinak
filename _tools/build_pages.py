@@ -522,8 +522,6 @@ def build_home():
   </div>
 </section>
 
-{depoimentos_section()}
-
 <section class="section has-orbs" aria-labelledby="como-t">
   {ORBS_D}
   <div class="container">
@@ -573,6 +571,8 @@ def build_home():
 </section>
 
 {materiais_section()}
+
+{depoimentos_section()}
 
 <section class="section faq has-orbs" id="duvidas" aria-labelledby="faq-t">
   {ORBS_A}
