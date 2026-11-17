@@ -26,6 +26,10 @@
 - Movimento e profundidade: Lenis (scroll suave), parallax por scroll e mouse, entrada animada no hero, reveal escalonado, orbs de cor flutuantes.
 - Glassmorphism em cards, planos, fatos, etapas, FAQ, pilares do método e formulário; hover com crescimento, inclinação 3D e brilho seguindo o cursor; botões com escala, brilho e efeito magnético.
 
+## Atualização 16/11 (Bruno): página de cupons
+- /cupons/ com os códigos do destaque "Cupons" do Instagram: Liv Up (ingrid.krichinak1 30% 1ª compra; ingrid.krichinak 10% demais), Ocean Drop (INGRIDK 20%), Dobro (DOBROINGRIDK), DUX (PACINGRIDFARIA). Dados em `COUPONS` no build.
+- Fica fora do menu e da home (link só no rodapé), com declaração de parceria visível. Novo Código de Ética do CFN (Res. 856/2026) exige declaração ostensiva de conflito de interesses e veda vincular marcas à prescrição individual.
+
 ## Inferências a validar com a Ingrid
 - Nome e conteúdo dos 3 formatos (Consultoria online, Acompanhamento completo, Plano de manutenção) — baseados nos stories de 2024.
 - "Método PR": mantido só como nome (não expandido).
@@ -35,4 +39,5 @@
 
 ## Pendências
 - CRN (obrigatório pelo CFN). Enquanto vazio, o site sai com noindex. Preencher `CRN` em `_tools/build_pages.py` e rodar o build.
+- Cupons: confirmar se os 4 seguem ativos (DUX é de ~87 semanas atrás), os % da Dobro e da DUX, e o texto de transparência.
 - Domínio próprio, GTM/GA4 (`GTM_ID` em `assets/site.js`).
