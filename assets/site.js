@@ -253,16 +253,28 @@
       var to = Math.max(0, Math.min(pages() - 1, i)) * step(), from = track.scrollLeft, dist = to - from;
       cancelAnimationFrame(anim);
       if(REDUCED || Math.abs(dist) < 2){ track.scrollLeft = to; return; }
-      var dur = Math.min(1100, 650 + Math.abs(dist) * .25), t0 = null;
+      var dur = Math.min(1250, 850 + Math.abs(dist) * .15), t0 = null;
       animating = true; track.style.scrollSnapType = "none"; track.style.scrollBehavior = "auto"; car.classList.add("is-moving");
       function frame(t){
         if(!t0) t0 = t;
-        var p = Math.min(1, (t - t0) / dur), e = p < .5 ? 16 * Math.pow(p, 5) : 1 - Math.pow(-2 * p + 2, 5) / 2;
+        var p = Math.min(1, (t - t0) / dur), e = p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
         track.scrollLeft = from + dist * e;
         if(p < 1){ anim = requestAnimationFrame(frame); }
         else { track.scrollLeft = Math.round(to); car.classList.remove("is-moving"); setTimeout(function(){ track.style.scrollSnapType = ""; track.style.scrollBehavior = ""; animating = false; }, 60); sync(); }
       }
       anim = requestAnimationFrame(frame);
+      // Cards que entram: deslizam do lado, com fade e leve crescimento, em sequência
+      var dir = dist > 0 ? 1 : -1, first = Math.round(to / step()), n = perView(), k = 0;
+      items.forEach(function(it, idx){
+        var willShow = idx >= first && idx < first + n, wasShown = it.getBoundingClientRect().right > track.getBoundingClientRect().left + 20 && it.getBoundingClientRect().left < track.getBoundingClientRect().right - 20;
+        if(willShow && !wasShown && it.animate){
+          it.animate([{opacity:0, transform:"translateX(" + (60 * dir) + "px) scale(.94) rotate(" + (1.5 * dir) + "deg)"},{opacity:1, transform:"none"}],
+            {duration:900, delay:120 + k * 90, easing:"cubic-bezier(.22,1,.36,1)", fill:"backwards"}); k++;
+        } else if(!willShow && wasShown && it.animate){
+          it.animate([{opacity:1, transform:"none"},{opacity:.25, transform:"translateX(" + (-30 * dir) + "px) scale(.96)"}],
+            {duration:600, easing:"cubic-bezier(.4,0,.2,1)"});
+        }
+      });
     }
     function buildDots(){
       dotsBox.innerHTML = "";
