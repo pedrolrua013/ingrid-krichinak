@@ -248,7 +248,22 @@
     function perView(){ return Math.max(1, Math.round(track.clientWidth / step())); }
     function pages(){ return Math.max(1, items.length - perView() + 1); }
     function current(){ return Math.min(pages() - 1, Math.round(track.scrollLeft / step())); }
-    function go(i){ track.scrollTo({left: Math.max(0, Math.min(pages() - 1, i)) * step(), behavior: REDUCED ? "auto" : "smooth"}); }
+    var anim = 0, animating = false;
+    function go(i){
+      var to = Math.max(0, Math.min(pages() - 1, i)) * step(), from = track.scrollLeft, dist = to - from;
+      cancelAnimationFrame(anim);
+      if(REDUCED || Math.abs(dist) < 2){ track.scrollLeft = to; return; }
+      var dur = Math.min(1100, 650 + Math.abs(dist) * .25), t0 = null;
+      animating = true; track.style.scrollSnapType = "none"; track.style.scrollBehavior = "auto"; car.classList.add("is-moving");
+      function frame(t){
+        if(!t0) t0 = t;
+        var p = Math.min(1, (t - t0) / dur), e = p < .5 ? 16 * Math.pow(p, 5) : 1 - Math.pow(-2 * p + 2, 5) / 2;
+        track.scrollLeft = from + dist * e;
+        if(p < 1){ anim = requestAnimationFrame(frame); }
+        else { track.scrollLeft = Math.round(to); car.classList.remove("is-moving"); setTimeout(function(){ track.style.scrollSnapType = ""; track.style.scrollBehavior = ""; animating = false; }, 60); sync(); }
+      }
+      anim = requestAnimationFrame(frame);
+    }
     function buildDots(){
       dotsBox.innerHTML = "";
       for(var i = 0; i < pages(); i++){ (function(i){
